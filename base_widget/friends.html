@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="jquery.mobile-1.0.min.css" />
+	<script type="text/javascript" src="jquery-1.7.1.min.js"></script>
+	<script type="text/javascript" src="jquery.tmpl.js"></script>
+	<script type="text/javascript" src="your_html.js"></script>
+	
+	<script type="text/javascript" src="jquery.mobile-1.0.min.js"></script>
+</head>
+<body>
+<div data-role="page">
+    <div data-role='header' data-position='inline' data-theme='d'>
+	    <a href="#" data-icon='alert' data-transition="pop">GTLogin</a>
+	    <h1>Sample Widget</h1>
+	    <a href="#" data-icon='add' data-transition="pop">Other</a>
+   	</div>	
+<div data-role="content">
+		<div class="content-primary">	
+			<ul id = "friends_list" data-role="listview" data-filter="true" data-filter-placeholder="Search people..." data-filter-theme="b">
+
+			<script id="nearby_friends_row_template" type="text/x-jquery-tmpl">
+				<li class="friend_row" id="friend_${id}">
+					<img src=${img_path}/>
+					<h1>${name}</h1>
+
+				</li>
+			</script>
+
+	
+			</ul>
+
+
+	</div><!--/content-primary-->
+</div>
+	
+	<script>
+		var data = [];
+		data[0] = {"id":"npapin3", "name":"Nicolas Papin", "img_path":"images/thumbnail.jpg"};
+		data[1] = {"id":"bboberson", "name":"Bob Boberson", "img_path":"images/thumbnail.jpg"};
+		$("#nearby_friends_row_template").tmpl(data).appendTo("#friends_list");
+		
+	</script>
+	
+	<div data-role="footer" data-position="fixed">
+
+		<div data-role="navbar" style="margin-top: 5px;">
+			<ul>
+				<li><a href="#" data-rel="dialog">Check In</a></li>
+				<li><a href="#">Friends</a></li>
+				<li><a href="#">Map</a></li>
+				<li><a href="#">Settings</a></li>
+			</ul>
+		</div>
+	</div> 
+<div>
+</body>
+</html>
