@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="jquery.mobile-1.0.min.css" />
+	<script type="text/javascript" src="jquery-1.7.1.min.js"></script>
+	<script type="text/javascript" src="jquery.mobile-1.0.min.js"></script>
+	<script type="text/javascript" src="your_html.js"></script>
+</head>
+<body>
+<div data-role="page">
+    <div data-role='header' data-position='inline' data-theme='d'>
+	    <a href="#" data-icon='alert' data-transition="pop">GTLogin</a>
+	    <h1>What's up?</h1>
+	    <a href="#" data-icon='add' data-transition="pop">Other</a>
+   	</div>
+	
+	<div id="content" data-role="content">
+		<form name="go">
+			<input type="button" name="test" value="Check In" onclick="checkIn()">
+		</form>
+		<div id='IndexResult'></div>
+		<div id='GetResult'></div>
+		<div id='PostResult'></div>
+		<div id='PutResult'></div>
+		<div id='DeleteResult'></div>
+	</div>
+<div>
+</body>
+</html>
