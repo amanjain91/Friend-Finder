@@ -25,7 +25,7 @@
 			</script>
 			<script id="nearby_friends_row_template" type="text/x-jquery-tmpl">
 				<li class="friend_row" id="friend_${id}">
-					<h1>${name}</h1>
+					<img src="${img}" class="ui-li-thumb" /><h1>${name}</h1>
 				</li>
 			</script>
 		</ul>
@@ -34,14 +34,14 @@
 	<script>
 		var data = [];
 		var i = 0;
-		data[i++] = {"id":"npapin3", "name":"Nicolas Papin", "locid":"0"};
-		data[i++] = {"id":"bboberson", "name":"Bob Boberson", "locid":"1"};
-		data[i++] = {"id":"1", "name":"1", "locid":"0"};
-		data[i++] = {"id":"4", "name":"4", "locid":"1"};
-		data[i++] = {"id":"2", "name":"2", "locid":"0"};
-		data[i++] = {"id":"5", "name":"5", "locid":"1"};
-		data[i++] = {"id":"3", "name":"3", "locid":"0"};
-		data[i++] = {"id":"6", "name":"6", "locid":"1"};
+		data[i++] = {"id":"npapin3", "name":"Nicolas Papin", "locid":"0", "img":"images/thumbnail.jpg"};
+		data[i++] = {"id":"bboberson", "name":"Bob Boberson", "locid":"1", "img":"images/thumbnail.jpg"};
+		data[i++] = {"id":"1", "name":"1", "locid":"0", "img":"images/thumbnail.jpg"};
+		data[i++] = {"id":"4", "name":"4", "locid":"1", "img":"images/thumbnail.jpg"};
+		data[i++] = {"id":"2", "name":"2", "locid":"0", "img":"images/thumbnail.jpg"};
+		data[i++] = {"id":"5", "name":"5", "locid":"1", "img":"images/thumbnail.jpg"};
+		data[i++] = {"id":"3", "name":"3", "locid":"0", "img":"images/thumbnail.jpg"};
+		data[i++] = {"id":"6", "name":"6", "locid":"1", "img":"images/thumbnail.jpg"};
 		
 		locations = [];
 		locations[0] = {"id":"0", "location":"CULC"};
