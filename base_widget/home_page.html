@@ -9,7 +9,7 @@
 <script type="text/javascript" src="jquery.mobile-1.0.min.js"></script>
 </head>
 <body>
-<div data-role="page">
+<div data-role="page" id="home_page">
     <div data-role='header' data-position='fixed' data-theme='d'>
 	    <a href="#" data-icon='alert' data-transition="pop">GTLogin</a>
 	    <h1>Sample Widget</h1>
@@ -19,8 +19,8 @@
 	<div id="content" data-role="content">
 		<ul id="friends_list" data-role="listview" data-inset="false" data-filter="true" data-theme="c" data-divider-theme="b">
 			<script id="nearby_friends_row_div_template" type="text/x-jquery-tmpl">
-				<li class="friend_row_div" id="location_${id}" data-role="list-divider">
-					${location}
+				<li class="friend_row_div" data-role="list-divider">
+					${name}
 				</li>
 			</script>
 			<script id="nearby_friends_row_template" type="text/x-jquery-tmpl">
@@ -33,38 +33,7 @@
 		</ul>
 	</div>
 	
-	<script>
-		var data = [];
-		var i = 0;
-		data[i++] = {"id":"npapin3", "name":"Nicolas Papin", "locid":"0", "img":"images/thumbnail.jpg", "status":"Chilling at Culc"};
-		data[i++] = {"id":"bboberson", "name":"Bob Boberson", "locid":"1", "img":"images/thumbnail.jpg", "status":"BS-ing at SC"};
-		data[i++] = {"id":"1", "name":"1", "locid":"0", "img":"images/thumbnail.jpg", "status":"Coding at CoC"};
-		data[i++] = {"id":"4", "name":"4", "locid":"1", "img":"images/thumbnail.jpg", "status":"Peeing at Klaus"};
-		data[i++] = {"id":"2", "name":"2", "locid":"0", "img":"images/thumbnail.jpg", "status":"Eating at Moes"};
-		data[i++] = {"id":"5", "name":"5", "locid":"1", "img":"images/thumbnail.jpg", "status":"Working Out at CRC"};
-		data[i++] = {"id":"3", "name":"3", "locid":"0", "img":"images/thumbnail.jpg", "status":"Beer ponging at Gurden's"};
-		data[i++] = {"id":"6", "name":"6", "locid":"1", "img":"images/thumbnail.jpg", "status":"Playing XBOX at Suren's"};
-		
-		locations = [];
-		locations[0] = {"id":"0", "location":"CULC"};
-		locations[1] = {"id":"1", "location":"Klaus"};
-		
-		var dataLoc = {};
-		
-		for(var d in data)
-		{
-			if(dataLoc[data[d].locid] == undefined)
-				dataLoc[data[d].locid] = [];
-				
-			dataLoc[data[d].locid].push(data[d]);
-		}
-		
-		for(var loc in locations)
-		{
-			$("#nearby_friends_row_div_template").tmpl(locations[loc]).appendTo("#friends_list");
-			$("#nearby_friends_row_template").tmpl(dataLoc[locations[loc].id]).appendTo("#friends_list");
-		}
-		
+	<script>		
 		$.mobile.fixedToolbars.setTouchToggleEnabled(false);
 	</script>
 	

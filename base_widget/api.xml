@@ -4,11 +4,11 @@
 		<![CDATA[This is an API to interact with all the FFinder items]]>
 	</description>
 	
-	<command id='nearme' security='private'>
+	<command id='nearme' security='public'>
 		<description><![CDATA[This simple API lets you find nearby friends]]></description>
-		<get>
-			<description><![CDATA[This is how you can get a listing of nearby friends from username and location]]></description>
-			<action file='nearfriends.php'><![CDATA[getCloseFriends($_POST['location']);]]></action>
-		</get>
+		<post>
+			<description><![CDATA[This is how you can get a listing of nearby friends from location.]]></description>
+			<action file='nearme.php'><![CDATA[getCloseFriends($_POST['location']);]]></action>
+		</post>
 	</command>
 </api>
