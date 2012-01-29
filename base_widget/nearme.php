@@ -5,12 +5,18 @@
 		$all_check_ins = getFriendCheckIns(getUserId());
 		$list_of_locations = new array();
 		while ($row = $all_check_ins) {
-			if(!$list_of_locations->contains($row["loc_id"])){
-				$list_of_locations->push($row["loc_id"]);
-			}
+			$list_of_locations->push($row["loc_id"]);
 		}
+		array_remove_duplicates($list_of_locations);
+		loc_dist = new array();
 		foreach($list_of_locations as $value){
-		
+			$query = "SELECT * FROM location_table WHERE location_id='$value'";
+			$result = mysql_fetch_assoc(mysql_query($query));
+			$row = $result;
+			$b_lat = $row["latitude"];
+			$b_long = $row["longitude"];
+			$dist = sqrt(pow($b_lat - $lat, 2) + pow($b_long-$long, 2));
+			
 		}
 		$count = $list_of_locations->count();
 		$i = 0;
