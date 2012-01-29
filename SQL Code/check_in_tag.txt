@@ -1,0 +1,3 @@
+CREATE TABLE IF NOT EXISTS check_in_tag(
+checkin_id integer NOT NULL,
+tags varchar(50));

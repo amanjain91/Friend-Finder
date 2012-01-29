@@ -1,32 +1,55 @@
-function getNearFriends()
+/**
+ * Function utilized to obtain the user's location.
+ */
+function getUserLocation(callBack)
 {
 	if(navigator.geolocation)
 	{
 		navigator.geolocation.getCurrentPosition(
-		function(position)
-		{
-			$.ajax({
-				url: "../../api/base_widget/nearme",
-				async: false,
-				dataType: "json",
-				data: {"lat": position.coords.latitude, "long": position.coords.longitude},
-				type: 'POST',
-				success: function(data)
-				{
-					populateListView(data);
-				}
-			});
-		},
-		function(error){},
-		{timeout: 30000});
+			callBack,
+			function(error) { userSelectLocation(callBack) },
+			{timeout: 30000}
+		);
 	}
 	else
 	{
-		
+		userSelectLocation(callBack);
 	}
 }
 
-function populateListView(data)
+/**
+ * Used when location is unavailable.  Allow user to select location.
+ */
+function userSelectLocation(callBack)
+{
+
+}
+
+/**
+ * Function which uses the specified location to obtain nearby friends.
+ */
+function getNearFriendsHome()
+{
+	getUserLocation(function(pos)
+	{
+		$.ajax({
+			url: "../../api/base_widget/nearFriends",
+			async: false,
+			dataType: "json",
+			data: {'location': pos.coords},
+			type: 'POST',
+			success: function(data)
+			{
+				populateHomeListView(data);
+			}
+		});
+	});
+}
+
+/**
+ * Specialized function for populating the data of the home page list view.
+ */
+function populateHomeListView(data)
 {	
 	$(".friend_row_div").remove();
 	$(".friend_row").remove();
@@ -41,8 +64,6 @@ function populateListView(data)
 		dataLoc[data[d].location].push(data[d]);
 	}
 	
-	console.log(dataLoc);
-	
 	for(var d in dataLoc)
 	{
 		var loc = {"name":d};
@@ -54,10 +75,47 @@ function populateListView(data)
 	$('#friends_list').listview('refresh');
 }
 
+/**
+ * Gets the nearby locations for use in check in.
+ */
+function getNearLocsCheckin()
+{
+	getUserLocation(function(pos)
+	{
+		$.ajax({
+			url: "../../api/base_widget/nearLocations",
+			async: false,
+			dataType: "json",
+			data: {'location': pos.coords},
+			type: 'POST',
+			success: function(data)
+			{
+				console.log("HERE");
+				populateCheckinLocations(data);
+			}
+		});
+	});
+}
+
+function populateCheckinLocations(data)
+{
+	$('#nearby_location_row_template').tmpl(data).appendTo('#locations_list');
+	
+	$('#locations_list').listview('refresh');
+}
+
+/**
+ * Bind all of the appropriate functions before showing the pages.
+ */
 $(function()
 {
 	$('#home_page').bind('pagebeforeshow',function(event, ui)
 	{	
-		getNearFriends();
+		getNearFriendsHome();
+	});
+	
+	$('#check_in_loc_page').bind('pagebeforeshow', function(event, ui)
+	{
+		getNearLocsCheckin();
 	});
 });

@@ -18,10 +18,8 @@
 			
 		}
 		
-		
-
-		$friend = array();
-		$friend[0] = array(
+		$friends = array();
+		$friends[0] = array(
 			"id" => "0",
 			"prism" => "npapin3",
 			"name" => "Nicolas Papin",
@@ -31,4 +29,5 @@
 		);
 		echo json_encode($friend);
 	}
+
 ?>
