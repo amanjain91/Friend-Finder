@@ -1,6 +1,7 @@
 CREATE TABLE IF NOT EXISTS check_in(
+checkin_id integer UNIQUE NOT NULL AUTO_INCREMENT,
 user_id integer UNIQUE NOT NULL,
 loc_id varchar(20) NOT NULL,
-activity varchar(100),
+status varchar(100),
 time datetime,
-PRIMARY KEY (user_id));
+PRIMARY KEY (checkin_id));
