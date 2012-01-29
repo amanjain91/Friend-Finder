@@ -33,7 +33,7 @@
 		echo json_encode($friend);
 	}
 
-	function getCloseLocations($location)
+	function getCloseLocations($lat, $long)
 	{
 		$locations = array();
 		$locations[0] = array(

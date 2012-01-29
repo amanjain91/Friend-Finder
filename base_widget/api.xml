@@ -8,7 +8,7 @@
 		<description><![CDATA[This API command lets you find nearby friends]]></description>
 		<post>
 			<description><![CDATA[This is how you can get a listing of nearby friends from location.]]></description>
-			<action file='nearme.php'><![CDATA[getCloseFriends($_POST['location']);]]></action>
+			<action file='nearme.php'><![CDATA[getCloseFriends($_POST['lat'], $_POST['long']);]]></action>
 		</post>
 	</command>
 	
@@ -16,7 +16,7 @@
 		<description><![CDATA[This API command lets you find nearby locations]]></description>
 		<post>
 			<description><![CDATA[This is how you can get a listing of nearby friends from location.]]></description>
-			<action file='nearme.php'><![CDATA[getCloseLocations($_POST['location']);]]></action>
+			<action file='nearme.php'><![CDATA[getCloseLocations($_POST['lat'], $_POST['long']);]]></action>
 		</post>
 	</command>
 </api>

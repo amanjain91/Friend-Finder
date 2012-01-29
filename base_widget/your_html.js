@@ -36,7 +36,7 @@ function getNearFriendsHome()
 			url: "../../api/base_widget/nearFriends",
 			async: false,
 			dataType: "json",
-			data: {'location': pos.coords},
+			data: {'lat': pos.coords.latitude, 'long': pos.coords.longitude},
 			type: 'POST',
 			success: function(data)
 			{
@@ -86,7 +86,7 @@ function getNearLocsCheckin()
 			url: "../../api/base_widget/nearLocations",
 			async: false,
 			dataType: "json",
-			data: {'location': pos.coords},
+			data: {'lat': pos.coords.latitude, 'long': pos.coords.longitude},
 			type: 'POST',
 			success: function(data)
 			{
