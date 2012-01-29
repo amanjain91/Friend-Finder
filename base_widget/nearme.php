@@ -1,6 +1,8 @@
 <?php
-function getCloseFriends($location) 
+function getCloseFriends($lat, $long) 
 {
+	
+
 	$friends = array();
 	$friends[0] = array(
 		"id" => "0",

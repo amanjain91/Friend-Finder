@@ -9,7 +9,7 @@ function getNearFriends()
 				url: "../../api/base_widget/nearme",
 				async: false,
 				dataType: "json",
-				data: {'location': position},
+				data: {"lat": position.coords.latitude, "long": position.coords.longitude},
 				type: 'POST',
 				success: function(data)
 				{
