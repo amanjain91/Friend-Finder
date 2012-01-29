@@ -1,6 +1,9 @@
 CREATE TABLE IF NOT EXISTS location_table(
 	location_id integer AUTO_INCREMENT
-	buliding_id integer UNIQUE
-	long	
-
+	building_id integer UNIQUE
+	longitude real
+	latitude  real
+	building_name text
+	img_url text
+	PRIMARY KEY (location_id)
 );
