@@ -3,11 +3,14 @@
 	include 'common_functions.php'
 	function getCloseFriends($lat, $long){ 
 		$all_check_ins = getFriendCheckIns(getUserId());
-		$list_of_locations = new SplObjectStorage();
+		$list_of_locations = new array();
 		while ($row = $all_check_ins) {
 			if(!$list_of_locations->contains($row["loc_id"])){
-				$list_of_locations->attach($row["loc_id"]);
+				$list_of_locations->push($row["loc_id"]);
 			}
+		}
+		foreach($list_of_locations as $value){
+		
 		}
 		$count = $list_of_locations->count();
 		$i = 0;
