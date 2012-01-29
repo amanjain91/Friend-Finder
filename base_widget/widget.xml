@@ -7,5 +7,5 @@
     <html file="your_html.html"/>
 	<javascript file="your_html.js"/>
 	
-	<library name="jquery.mobile" version="1.0b3" /> 
+    <library name="jquery.mobile" version="1.0b3" /> 
 </widget>
