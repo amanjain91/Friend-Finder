@@ -1,14 +1,22 @@
 <?xml version="1.0"?>
 <api>
 	<description>
-		<![CDATA[This is an API to interact with all the FFinder items]]>
+		<![CDATA[This is an API to interact with all the FFinder commands]]>
 	</description>
 	
-	<command id='nearme' security='public'>
-		<description><![CDATA[This simple API lets you find nearby friends]]></description>
+	<command id='nearFriends' security='private'>
+		<description><![CDATA[This API command lets you find nearby friends]]></description>
 		<post>
 			<description><![CDATA[This is how you can get a listing of nearby friends from location.]]></description>
-			<action file='nearme.php'><![CDATA[getCloseFriends($_POST['lat'], $_POST['long']);]]></action>
+			<action file='nearme.php'><![CDATA[getCloseFriends($_POST['location']);]]></action>
+		</post>
+	</command>
+	
+	<command id='nearLocations' security='private'>
+		<description><![CDATA[This API command lets you find nearby locations]]></description>
+		<post>
+			<description><![CDATA[This is how you can get a listing of nearby friends from location.]]></description>
+			<action file='nearme.php'><![CDATA[getCloseLocations($_POST['location']);]]></action>
 		</post>
 	</command>
 </api>
