@@ -33,4 +33,14 @@
 		echo json_encode($friend);
 	}
 
+	function getCloseLocations($location)
+	{
+		$locations = array();
+		$locations[0] = array(
+			"id" => "0",
+			"location" => "CULC"
+		);
+		
+		echo json_encode($locations);
+	}	
 ?>
