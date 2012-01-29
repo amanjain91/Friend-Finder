@@ -1,0 +1,9 @@
+CREATE TABLE IF NOT EXISTS user_table(
+user_id integer AUTO_INCREMENT,
+prism_id varchar(20) UNIQUE NOT NULL,
+first_name varchar(20),
+last_name varchar(20),
+phone_num varchar(20),
+email_add varchar(20),
+img_url text,
+PRIMARY KEY (user_id));
