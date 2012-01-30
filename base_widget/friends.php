@@ -8,6 +8,8 @@
 	{	
 		$friends = getFriends(getUserId());
 		
+		// POSSIBLY ADD STATEMENT HERE TO GET FULL FRIEND ROWS, NOT JUST ID'S.
+		
 		echo json_encode($friends);
 	}
 ?>

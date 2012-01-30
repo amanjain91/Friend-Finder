@@ -105,6 +105,22 @@ function populateCheckinLocations(data)
 }
 
 /**
+ * Get a list of the users friends.
+ */
+function getUserFriends()
+{
+	$.ajax({
+			url: "../../api/base_widget/friends",
+			async: false,
+			dataType: "json",
+			success: function(data)
+			{
+				// TODO: DO WHATEVER WE NEED WITH FRIENDS HERE.
+			}
+		});
+}
+
+/**
  * Bind all of the appropriate functions before showing the pages.
  */
 $(function()
