@@ -19,4 +19,12 @@
 			<action file='nearme.php'><![CDATA[getCloseLocations($_POST['lat'], $_POST['long']);]]></action>
 		</post>
 	</command>
+	
+	<command id='friends' security='private'>
+		<description><![CDATA[This API command lets you get your friends]]></description>
+		<index>
+			<description><![CDATA[This is how you can get a listing of all of your friends.]]></description>
+			<action file='friends.php'><![CDATA[getAllFriends();]]></action>
+		</index>
+	</command>
 </api>
