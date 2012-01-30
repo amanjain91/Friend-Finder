@@ -39,7 +39,8 @@ function getNearFriendsHome()
 			data: {'lat': pos.coords.latitude, 'long': pos.coords.longitude},
 			type: 'POST',
 			success: function(data)
-			{
+			{   
+                console.log("HERE");
 				populateHomeListView(data);
 			}
 		});
