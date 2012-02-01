@@ -40,7 +40,6 @@ function getNearFriendsHome()
 			type: 'POST',
 			success: function(data)
 			{   
-                console.log("HERE");
 				populateHomeListView(data);
 			}
 		});
@@ -55,22 +54,12 @@ function populateHomeListView(data)
 	$(".friend_row_div").remove();
 	$(".friend_row").remove();
 	
-	var dataLoc = {};
-	
 	for(var d in data)
 	{
-		if(dataLoc[data[d].location] == undefined)
-			dataLoc[data[d].location] = [];
-			
-		dataLoc[data[d].location].push(data[d]);
-	}
-	
-	for(var d in dataLoc)
-	{
 		var loc = {"name":d};
-	
+		console.log(loc.name);
 		$("#nearby_friends_row_div_template").tmpl(loc).appendTo("#friends_list");
-		$("#nearby_friends_row_template").tmpl(dataLoc[d]).appendTo("#friends_list");
+		$("#nearby_friends_row_template").tmpl(data[d]).appendTo("#friends_list");
 	}
 
 	$('#friends_list').listview('refresh');

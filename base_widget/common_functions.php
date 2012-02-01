@@ -1,5 +1,5 @@
 <?php
-	include 'db_helper.php';
+	include_once 'db_helper.php';
 	function getUserId(){
 		global $_USER;
 		$prismid = $_USER['uid'];
@@ -12,7 +12,7 @@
 	}
 	
 	function getFriendCheckIns($user_id){
-		return mysql_fetch_assoc(mysql_query(
+		return getDBResultsArray(
 		"	
 			SELECT * 
 			FROM check_in
@@ -20,13 +20,13 @@
 			IN (
 				SELECT user_a
 				FROM friend_map
-				WHERE user_b = '4'
+				WHERE user_b = '$user_id'
 				AND STATUS =1
 				UNION SELECT user_b
 				FROM friend_map
-				WHERE user_a = '4'
+				WHERE user_a = '$user_id'
 				AND STATUS =1
 			)
-			"));
+			");
 	}
 ?>

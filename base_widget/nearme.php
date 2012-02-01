@@ -1,42 +1,49 @@
 <?php
+
 	include 'db_helper.php';
-	include 'common_functions.php'
+	include 'common_functions.php';
 	function getCloseFriends($lat, $long){ 
 		//Getting all the checked in friends.
 		$all_check_ins = getFriendCheckIns(getUserId());
-		$list_of_locations = new array();
+		$list_of_locations = array();
 		//Getting all the building ids.
-		while ($row = $all_check_ins) {
-			$list_of_locations->push($row["loc_id"]);
+		foreach($all_check_ins as $row) 
+		{
+			array_push($list_of_locations, $row["loc_id"]);
 		}
 		//Removing all the duplicate building ids
 		// so as to find the distances.
-		array_remove_duplicates($list_of_locations);
+		array_unique($list_of_locations);
 		//Array for mapping each building id to its distance. 
 		//Will be reused later
-		loc_dist = new array();
-		foreach($list_of_locations as $value){
-		//getting longitude and latitude to calculate diatance and putting distance in loc_dist
-			$query = "SELECT * FROM location_table WHERE location_id='$value'";
-			$result = mysql_fetch_assoc(mysql_query($query));
-			$row = $result;
+
+		$loc_dist = array();
+		$qry_str = "'" . implode("','", $list_of_locations) . "'";
+
+		$query = "SELECT * FROM location_table WHERE location_id IN ($qry_str);";
+		$result = getDBResultsArray($query);
+
+		foreach($result as $row)
+		{			
 			$b_lat = $row["latitude"];
 			$b_long = $row["longitude"];
 			$dist = sqrt(pow($b_lat - $lat, 2) + pow($b_long-$long, 2));
-			$loc_dist[$value] = $dist;
+			$loc_dist[$row["location_id"]] = $dist;
 		}
+		
 		//Sorting loc_dist according to the cvalue.
 		asort($loc_dist);
 		//Deleting distance and putting it as an array
-		for($loc_dist as $key=>$value){
-			$loc_dist[$key] = new array();
+		foreach($loc_dist as $key=>$value){
+			$loc_dist[$key] = array();
 		}
 		//Getting the data again to restore the pointer.
-		$all_check_ins = getFriendCheckIns(getUserId());
-		while($row=all_check_ins){
-			$loc_dist[$row["loc_id"]][]=$row["user_id"];
+		foreach($all_check_ins as $row){
+			array_push($loc_dist[$row["loc_id"]], array("id" => $row["user_id"]));
 		}
-		echo "FUCK THIS SHIT";
+
+		// PERHAPS CONVERT TO OTHER ENCODING HERE
+		
 		echo json_encode($loc_dist);
 	}
 

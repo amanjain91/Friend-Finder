@@ -5,7 +5,7 @@
 		<a href="#home_page" data-icon='home' data-transition="pop">Home</a>
    	</div>
 	
-	<div id="content" data-role="content">
+	<div id="home_content" data-role="content">
 		<ul id="friends_list" data-role="listview" data-inset="false" data-filter="true" data-theme="c" data-divider-theme="b">
 			<script id="nearby_friends_row_div_template" type="text/x-jquery-tmpl">
 				<li class="friend_row_div" data-role="list-divider">
@@ -13,10 +13,10 @@
 				</li>
 			</script>
 			<script id="nearby_friends_row_template" type="text/x-jquery-tmpl">
-				<li class="friend_row" id="friend_${id}" data-filtertext="${name} ${status} ${location}">
-					<img src="${img}" class="ui-li-thumb" />
-					<h1>${name}</h1>
-					<p>${status}</p>
+				<li class="friend_row" id="friend_${id}" data-filtertext="Filtertext">
+					<img src="img/thumbnail.jpg" class="ui-li-thumb" />
+					<h1>${id}</h1>
+					<p>Status</p>
 				</li>
 			</script>
 		</ul>
@@ -35,11 +35,11 @@
 			</ul>
 		</div>
 	</div> 
-<div>
+</div>
 
 <!--*************************************************************************************************-->
 <div data-role="page" id="check_in_loc_page">	
-	<div id="content" data-role="content" >
+	<div id="check_in_loc_content" data-role="content" >
 		<ul id="locations_list"  data-role="listview" data-theme="g" data-inset="true" data-filter="true">
 			<script id="nearby_location_row_template" type="text/x-jquery-tmpl">
 				<li class="location_row" id="location_${id}">
