@@ -45,13 +45,16 @@
 			array_push(
 				$loc_dist[$location_id_to_name[$row["loc_id"]]], 	
 				array(
-					"fname" =>	$user_data["first_name"], 
-					"lname" => 	$user_data["last_name"], 
-					"status" =>	$row["status"], 
-					"time"  =>	$row["time"],
-					"img_url"=>	$user_data["img_url"]
+					"fname"		=>	$user_data["first_name"], 
+					"lname" 	=> 	$user_data["last_name"], 
+					"status" 	=>	$row["status"], 
+					"time"  	=>	$row["time"],
+					"img_url"	=>	$user_data["img_url"],
+					"nphone"	=>	$user_data["phone_num"]
 				)
 			);
+			//FORMAT <a href="tel:1-408-555-5555">Person Name</a>
+			//<a href='tel:123-555-1212'>Person name</a>
 		}
 		echo json_encode($loc_dist);
 	}
