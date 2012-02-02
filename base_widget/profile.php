@@ -7,6 +7,7 @@
 	 */
 	function getInfo($friendID)
 	{	
+		$user_id = getUserId();
 		
 		$friends = getFriends($user_id);
 		
