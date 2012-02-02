@@ -1,12 +1,8 @@
 <?php
-include 'db_helper.php'
-include 'common_functions.php'
+include 'db_helper.php';
+include 'common_functions.php';
 function getCloseLocations($lat, $long) {
 		$locations = array();
-		$locations[0] = array(
-			"id" => "0",
-			"location" => "CULC"
-		);
 		$query = "SELECT * FROM location_table";
 		$result = getDBResultsArray($query);
 		$i=0;
@@ -15,8 +11,8 @@ function getCloseLocations($lat, $long) {
 			$cur_lat = $row["latitute"];
 			$cur_long = $row["longitude"];
 			$dist = sqrt(pow($cur_lat - $lat, 2) + pow($cur_long-$long, 2));
-			$locations[i++]['id'] = $row['location_id'];
-			$locations[i++]['location'] = $row['building_name'];
+			$locations[i]['id'] = $row['location_id'];
+			$locations[i]['location'] = $row['building_name'];
 			$locations[i++]['dist'] = $dist;
 			
 		}
