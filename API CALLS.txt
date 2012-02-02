@@ -1,0 +1,36 @@
+// nearFriends
+$.ajax
+({
+	url: "../../api/base_widget/nearFriends",
+	dataType: "text",
+	data: {"lat":33.5, "long":44.5},
+	type: 'POST',
+	success: function(data)
+	{
+		console.log(data);
+	}
+});
+
+// nearLocations
+$.ajax
+({
+	url: "../../api/base_widget/nearLocations",
+	dataType: "text",
+	data: {"lat":33.5, "long":44.5},
+	type: 'POST',
+	success: function(data)
+	{
+		console.log(data);
+	}
+});
+
+// friends
+$.ajax
+({
+	url: "../../api/base_widget/friends",
+	dataType: "text",
+	success: function(data)
+	{
+		console.log(data);
+	}
+});
