@@ -14,21 +14,20 @@
 		$i = 0;
 		$found = FALSE;
 		
-		while(i < sizeof($friends)
+		while($i < sizeof($friends))
 		{
-			if ($friendID == $friends[i])
+			if ($friendID == $friends[$i])
 			{
 				$found = TRUE;
 				break;
 			}
 			
-			i++;
+			$i++;
 		}
-		
 		
 		if($found)
 		{		
-			$query = "SELECT first_name, last_name, img_url , phone_num FROM user_table WHERE user_id = "$friend_ID";";
+			$query = "SELECT first_name, last_name, img_url, phone_num, email_add FROM user_table WHERE user_id = '$friendID';";
 		
 			$info = getDBResultsArray($query);
 		
@@ -37,6 +36,7 @@
 		
 		else
 		{
+			// REPLACE WITH 404 or 503 redirect
 			echo "Sorry, not in Friend List.";
 		}
 	}

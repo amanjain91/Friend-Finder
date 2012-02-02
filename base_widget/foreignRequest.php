@@ -2,8 +2,9 @@
 
 function getGTPlacesData()
 {
-	$json = file_get_contents("");
+	$locs = json_decode(file_get_contents("http://m.cip.gatech.edu/api/gtplaces/buildings"), true);
 
+	return $locs;
 }
 
 ?>
