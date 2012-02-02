@@ -27,9 +27,7 @@
 		
 		
 		if($found)
-		{
-			
-		
+		{		
 			$query = "SELECT first_name, last_name, img_url , phone_num FROM user_table WHERE user_id = "$friend_ID";";
 		
 			$info = getDBResultsArray($query);

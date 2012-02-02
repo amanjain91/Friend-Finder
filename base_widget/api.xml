@@ -28,7 +28,7 @@
 		</index>
 		<get>
 			<description><![CDATA[This is how you can get the info for a specified friend.]]></description>
-			<action file='profile.php'><![CDATA[getInfo($_REST['friend_id']);]]></action>
+			<action file='profile.php'><![CDATA[getInfo($_REST['friends']);]]></action>
 		</get>
 	</command>
 </api>
