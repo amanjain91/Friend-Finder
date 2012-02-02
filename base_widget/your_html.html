@@ -49,7 +49,7 @@
 	</div>
 </div>
 
-<!--*************************************************************************************************-->
+<!--************************************ Friends Page ***********************************************-->
 <div data-role="page" id="friends_page">
 	<div data-id="main_header" data-role='header' data-position='fixed'>
 		<a href="#home_page" data-icon='home' data-transition="pop">Home</a>
@@ -58,16 +58,50 @@
 
 	<div data-role="content">
 		<div class="content-primary">	
-			<ul id = "friend_page_list" data-role="listview" data-filter="true" data-filter-placeholder="Search people..." data-filter-theme="b">
+			<ul id = "friend_page_list" data-role="listview" data-filter="true" data-filter-placeholder="Search friends..." data-filter-theme="b">
 				<script id="friends_row_template" type="text/x-jquery-tmpl">
-					<li class="friend_row" id="friend_${username}">
-						<a href="#profile&friend=${username}">
+					<li class="friend_row" id="friend_${id}">
+						<a href="#profile&friend=${id}">
 							<img src="${img_url}"/>
 							<h1>${first_name} ${last_name}</h1>
 						</a>
 					</li>
 				</script>
 			</ul>
+		</div><!--/content-primary-->
+	</div>
+	
+	<div data-id="main_footer" data-role="footer" data-position="fixed">
+		<div data-role="navbar" class="ui-state-persist">
+			<ul>
+				<li><a href="#friends_page" class="ui-btn-active" data-transition="slide">Friends</a></li>
+				<li><a href="#check_in_loc_page" data-transition="slide">Check In</a></li>
+				<li><a href="#settings_page" data-transition="slide">Settings</a></li>
+			</ul>
+		</div>
+	</div>
+	<script>	
+		$.mobile.fixedToolbars.setTouchToggleEnabled(false);
+	</script>
+</div>
+
+<!--************************************ Friend Profile Page ***********************************************-->
+<div data-role="page" id="profile_page">
+	<div data-id="main_header" data-role='header' data-position='fixed'>
+		<a href="#home_page" data-icon='home' data-transition="pop">Home</a>
+	    <h1>FriendLoc</h1>
+   	</div>
+
+	<div data-role="content">
+		<div class="content-primary">	
+			<div id="profile_template">
+			<script>
+				<img src = "${img_url}"/>
+				<h1>${first_name} ${last_name}</h1>
+				<p>Email: ${email_add}</p>
+				<p>Phone: ${phone_num}</p>
+			</script>
+			</div
 		</div><!--/content-primary-->
 	</div>
 	
@@ -84,6 +118,8 @@
 		$.mobile.fixedToolbars.setTouchToggleEnabled(false);
 	</script>
 </div>
+
+
 
 <!--*************************************************************************************************-->
 <div data-role="page" id="settings_page">
