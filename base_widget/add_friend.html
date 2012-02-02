@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="jquery.mobile-1.0.min.css" />
+<script type="text/javascript" src="jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="jquery.tmpl.js"></script>
+<script type="text/javascript" src="your_html.js"></script>
+
+<script type="text/javascript" src="jquery.mobile-1.0.min.js"></script>
+</head>
+<body>
+<div data-role="page" id="add_friend">
+    <div data-role='header' data-position='fixed' data-theme='d'>
+	    <a href="#" data-icon='alert' data-transition="pop">GTLogin</a>
+	    <h1>Sample Widget</h1>
+	    <a href="#" data-icon='add' data-transition="pop">Other</a>
+   	</div>
+	
+	<div id="content" data-role="content">
+		
+		<form action="add_friend.php" method="get" class="ui-body ui-body-a ui-corner-all">
+			<fieldset>
+				<div data-role="fieldcontain">
+    				<input type="search" name="name" id="search" value="Enter Name"/>
+				</div>
+			</fieldset>
+		</form>
+
+	</div>
+	
+	<script>		
+		$.mobile.fixedToolbars.setTouchToggleEnabled(false);
+	</script>
+	
+	<div data-role="footer" data-position="fixed">
+		<div data-role="navbar">
+			<ul>
+				<li><a href="#">Friends</a></li>
+				<li><a href="#">Check In</a></li>
+				<li><a href="#">Settings</a></li>
+			</ul>
+		</div>
+	</div> 
+<div>
+</body>
+</html>
