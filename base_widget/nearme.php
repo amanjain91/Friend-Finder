@@ -1,5 +1,4 @@
 <?php
-
 	include 'db_helper.php';
 	include 'common_functions.php';
 	function getCloseFriends($lat, $long){
@@ -46,15 +45,14 @@
 			array_push(
 				$loc_dist[$location_id_to_name[$row["loc_id"]]], 	
 				array(
-					"fname"=> $user_data["first_name"], 
-					"lname"=> $user_data, 
-					"status"=>$row["status"], 
-					"time"=>$row["time"],
-					"img_url"=>$user_data["img_url"]
+					"fname" =>	$user_data["first_name"], 
+					"lname" => 	$user_data["last_name"], 
+					"status" =>	$row["status"], 
+					"time"  =>	$row["time"],
+					"img_url"=>	$user_data["img_url"]
 				)
 			);
 		}
-		// TODO: PERHAPS CONVERT TO OTHER ENCODING HERE	
 		echo json_encode($loc_dist);
 	}
 
