@@ -6,9 +6,12 @@
 	 */
 	function getAllFriends()
 	{	
-		$friends = getFriends(getUserId());
+		$friend_ids = getFriends(getUserId());
 		
-		// POSSIBLY ADD STATEMENT HERE TO GET FULL FRIEND ROWS, NOT JUST ID'S.
+		$qry_str = "'" . implode("','", $friend_ids) . "'";
+		$query = "SELECT user_id AS id, first_name, last_name, img_url FROM user_table WHERE user_id IN ($qry_str);";
+		
+		$friends = getDBResultsArray($query);
 		
 		echo json_encode($friends);
 	}

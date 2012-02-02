@@ -57,7 +57,6 @@ function populateHomeListView(data)
 	for(var d in data)
 	{
 		var loc = {"name":d};
-		console.log(loc.name);
 		$("#nearby_friends_row_div_template").tmpl(loc).appendTo("#friends_list");
 		$("#nearby_friends_row_template").tmpl(data[d]).appendTo("#friends_list");
 	}
@@ -80,7 +79,6 @@ function getNearLocsCheckin()
 			type: 'POST',
 			success: function(data)
 			{
-				console.log("HERE");
 				populateCheckinLocations(data);
 			}
 		});
@@ -97,7 +95,7 @@ function populateCheckinLocations(data)
 /**
  * Get a list of the users friends.
  */
-function getUserFriends()
+function getUserFriends(callback)
 {
 	$.ajax({
 			url: "../../api/base_widget/friends",
@@ -105,9 +103,18 @@ function getUserFriends()
 			dataType: "json",
 			success: function(data)
 			{
-				// TODO: DO WHATEVER WE NEED WITH FRIENDS HERE.
+				callback(data);
 			}
-		});
+	});
+}
+
+function populateFriendList(data)
+{
+	$('.friend_row').remove();
+
+	$('#friends_row_template').tmpl(data).appendTo('#friend_page_list');
+	
+	$('#friend_page_list').listview('refresh');
 }
 
 /**
@@ -123,5 +130,10 @@ $(function()
 	$('#check_in_loc_page').bind('pagebeforeshow', function(event, ui)
 	{
 		getNearLocsCheckin();
+	});
+	
+	$('#friends_page').bind('pagebeforeshow', function(event, ui)
+	{
+		getUserFriends(populateFriendList);
 	});
 });
