@@ -1,6 +1,6 @@
 <?php
-include 'db_helper.php'
-include 'common_functions.php'
+include 'db_helper.php';
+include 'common_functions.php';
 function getCloseLocations($lat, $long) {
 		$locations = array();
 		$query = "SELECT * FROM location_table";
