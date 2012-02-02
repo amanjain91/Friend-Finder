@@ -34,3 +34,14 @@ $.ajax
 		console.log(data);
 	}
 });
+
+// profile
+$.ajax
+({
+	url: "../../api/base_widget/friends/1",
+	dataType: "text",
+	success: function(data)
+	{
+		console.log(data);
+	}
+});

@@ -57,6 +57,12 @@ function populateHomeListView(data)
 	for(var d in data)
 	{
 		var loc = {"name":d};
+		
+		for(var i in data[d])
+		{
+			data[d][i].loc = d;
+		}
+		
 		$("#nearby_friends_row_div_template").tmpl(loc).appendTo("#friends_list");
 		$("#nearby_friends_row_template").tmpl(data[d]).appendTo("#friends_list");
 	}
@@ -135,5 +141,13 @@ $(function()
 	$('#friends_page').bind('pagebeforeshow', function(event, ui)
 	{
 		getUserFriends(populateFriendList);
+	});
+	
+	$('#profile_page').bind('pagebeforeshow', function(event, ui)
+	{
+		var friend_id = $.url().fparam("friend_id");
+		
+		
+	
 	});
 });
