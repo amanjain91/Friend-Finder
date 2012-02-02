@@ -3,6 +3,7 @@
 	include 'db_helper.php';
 	include 'common_functions.php';
 	function getCloseFriends($lat, $long){ 
+		$location_id_to_name = array();
 		//Getting all the checked in friends.
 		$all_check_ins = getFriendCheckIns(getUserId());
 		$list_of_locations = array();
@@ -26,7 +27,8 @@
 			$b_lat = $row["latitude"];
 			$b_long = $row["longitude"];
 			$dist = sqrt(pow($b_lat - $lat, 2) + pow($b_long-$long, 2));
-			$loc_dist[$row["location_id"]] = $dist;
+			$loc_dist[$row["building_name"]] = $dist;
+			$location_id_to_name[$row["location_id"]] = $row["building_name"];
 		}
 		
 		//Sorting loc_dist according to the cvalue.
@@ -37,7 +39,7 @@
 		}
 		//Getting the data again to restore the pointer.
 		foreach($all_check_ins as $row){
-			array_push($loc_dist[$row["loc_id"]], array("id" => $row["user_id"]));
+			array_push($loc_dist[$location_id_to_name[$row["loc_id"]]], array("id" => $row["user_id"]));
 		}
 
 		// PERHAPS CONVERT TO OTHER ENCODING HERE
