@@ -7,8 +7,7 @@
 		$all_check_ins = getFriendCheckIns(getUserId());
 		$list_of_locations = array();
 		//Getting all the building ids.
-		foreach($all_check_ins as $row) 
-		{
+		foreach($all_check_ins as $row) {
 			array_push($list_of_locations, $row["loc_id"]);
 		}
 		//Removing all the duplicate building ids
@@ -23,8 +22,7 @@
 		$query = "SELECT * FROM location_table WHERE location_id IN ($qry_str);";
 		$result = getDBResultsArray($query);
 
-		foreach($result as $row)
-		{			
+		foreach($result as $row) {
 			$b_lat = $row["latitude"];
 			$b_long = $row["longitude"];
 			$dist = sqrt(pow($b_lat - $lat, 2) + pow($b_long-$long, 2));
