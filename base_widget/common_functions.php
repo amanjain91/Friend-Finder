@@ -7,8 +7,22 @@
 		$prismid = $prismid['user_id'];
 		return $prismid;
 	}
-	function getFriends($user_id){
-		return getDBResultsArray("SELECT user_b FROM friend_map WHERE status=1 AND user_a='$user_id' UNION SELECT user_a FROM friend_map WHERE status=1 AND user_b='$user_id'");
+	
+	function getFriends($user_id)
+	{
+		$arr = getDBResultsArray("SELECT user_b FROM friend_map WHERE status=1 AND user_a='$user_id' UNION SELECT user_a FROM friend_map WHERE status=1 AND user_b='$user_id'");
+		
+		$ret = array();
+		
+		foreach($arr as $row)
+		{
+			foreach($row as $key=>$value)
+			{
+				array_push($ret, $value);
+			}
+		}
+		
+		return $ret;
 	}
 	
 	function getFriendCheckIns($user_id){
