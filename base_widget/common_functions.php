@@ -41,6 +41,6 @@
 				WHERE user_a = '$user_id'
 				AND STATUS =1
 			)
-			");
+		");
 	}
 ?>
