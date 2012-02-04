@@ -5,16 +5,9 @@
 */
 function getGTPlacesData() {
 	$locs = json_decode(file_get_contents("http://m.cip.gatech.edu/api/gtplaces/buildings"), true);
-<<<<<<< HEAD
 	foreach($locs as $rows)
 	{
-=======
-	$i = 0;
-	foreach($locs as $rows){
-		//Incrementing location id
-		$i++;
 		//Building Id.
->>>>>>> cc44f1e0b24119354641ab429f7f9feb8c806129
 		$b_id = $rows["building_id"];
 		//Latitude
 		$lat = $rows["latitude"];
