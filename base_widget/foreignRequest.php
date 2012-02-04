@@ -2,9 +2,8 @@
 
 function getGTPlacesData() {
 	$locs = json_decode(file_get_contents("http://m.cip.gatech.edu/api/gtplaces/buildings"), true);
-	$i = 0;
-	foreach($locs as $rows){
-		$i++;
+	foreach($locs as $rows)
+	{
 		$b_id = $rows["building_id"];
 		$lat = $rows["latitude"];
 		$lon = $rows["longitude"];
@@ -19,15 +18,14 @@ function getGTPlacesData() {
 					img_url
 				)
 				VALUES (
-					$i, 
-					$b_id, 
-					$lon, 
-					$lat,
-					$name, 
-					$img
+					'$b_id', 
+					'$lon', 
+					'$lat',
+					'$name', 
+					'$img'
 				)";
-		//I don't know what function from db helper to call.
-		// FIXME for Nick.
+		
+		getDBResultInserted($sql, 0);
 	}
 	return $locs;
 }
