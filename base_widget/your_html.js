@@ -123,6 +123,26 @@ function populateFriendList(data)
 	$('#friend_page_list').listview('refresh');
 }
 
+function getFriendProfile(id, callBack)
+{
+	$.ajax({
+			url: "../../api/base_widget/friends/" + id,
+			async: false,
+			dataType: "json",
+			success: function(data)
+			{
+				callback(data);
+			}
+	});
+}
+
+function populateProfilePage(data)
+{
+	$('#profile_content').empty();
+	
+	$('#profile_template').tmpl(data).appendTo('#profile_content');
+}
+
 /**
  * Bind all of the appropriate functions before showing the pages.
  */
@@ -147,7 +167,6 @@ $(function()
 	{
 		var friend_id = $.url().fparam("friend_id");
 		
-		
-	
+		getFriendProfile(friend_id, populateProfilePage);
 	});
 });
