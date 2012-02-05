@@ -9,7 +9,11 @@
 	
 	/**checks if this phone number contains 10 digits.**/
 	function is_valid_phone_number($a_number){
-		$all_letters = str_split($a_number);
+		$regex = "^[(\[\d]{3}(\))|[\d]{3}][-]?[\d{4}]]$";
+		if(preg_match($regex, $a_number) == 1){
+			return true;
+		}
+		/*$all_letters = str_split($a_number);
 		$count_of_valid_numbers = 0;
 		for($i = 0; $i < sizeof($all_letters); $i++){
 			if(ctype_digit($all_letters[$i])){
@@ -18,7 +22,7 @@
 		}
 		if($count_of_valid_numbers == 10){
 			return true;
-		}
+		}*/
 		return false;
 	}
 	
