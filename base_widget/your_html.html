@@ -92,16 +92,14 @@
    	</div>
 
 	<div data-role="content">
-		<div class="content-primary">	
-				<script id="profile_template" type="text/x-jquery-tmpl">
-					<img src = "${img_url}"/>
-					<h1>${first_name} ${last_name}</h1>
-					<p>Email: ${email_add}</p>
-					<p>Phone: ${phone_num}</p>
-				</script>
-				<div id="profile_content">
-				</div>
-		</div><!--/content-primary-->
+		<script id="profile_template" type="text/x-jquery-tmpl">
+			<img src = "${img_url}"/>
+			<h1>${first_name} ${last_name}</h1>
+			<p>Email: ${email_add}</p>
+			<p>Phone: ${phone_num}</p>
+		</script>
+		<div id="profile_content">
+		</div>
 	</div>
 	
 	<div data-id="main_footer" data-role="footer" data-position="fixed">
@@ -118,7 +116,38 @@
 	</script>
 </div>
 
-
+<!--************************************ Create Profile Page ***********************************************-->
+<div data-role="page" id="create_initial_profile_page">
+	<div data-id="main_header" data-role="header" data-position="fixed">
+		<h1>FriendLoc</h1>
+	</div>
+	
+	<div data-role="content">
+		<div data-role="fieldcontain">
+			<label for="fname"><span style="color: red">*</span>First Name:</label>
+			<input type="text" name="fname" id="fname" value=""  />
+		</div>
+		<div data-role="fieldcontain">
+			<label for="lname"><span style="color: red">*</span>Last Name:</label>
+			<input type="text" name="lname" id="lname" value=""  />
+		</div>
+		<div data-role="fieldcontain">
+			<label for="pnum">Phone Number:</label>
+			<input type="tel" name="pnum" id="pnum" value=""  />
+		</div>
+		<div data-role="fieldcontain">
+			<label for="email">Phone Number:</label>
+			<input type="email" name="email" id="email" value=""  />
+		</div>
+		<div data-role="fieldcontain">
+			<a onclick="" data-role="button">Submit</a>
+		</div>
+	</div>
+	
+	<script>	
+		$.mobile.fixedToolbars.setTouchToggleEnabled(false);
+	</script>
+</div>
 
 <!--*************************************************************************************************-->
 <div data-role="page" id="settings_page">

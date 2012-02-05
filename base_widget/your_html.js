@@ -1,4 +1,33 @@
 /**
+ * Used to validate the user if he has not been.
+ */
+var validUser = false;
+function validate(callback)
+{
+	if(validUser)
+	{
+		callback();
+	}
+	else
+	{
+		$.ajax({
+				url: "../../api/base_widget/testValidation",
+				async: true,
+				dataType: "json",
+				success: function(data)
+				{
+					callback();
+				},
+				error: function()
+				{
+					$.mobile.changePage("#create_initial_profile_page");
+				}
+		});
+	}
+}
+
+
+/**
  * Function utilized to obtain the user's location.
  */
 function getUserLocation(callBack)
@@ -150,24 +179,24 @@ function populateProfilePage(data)
 $(function()
 {
 	$('#home_page').bind('pagebeforeshow',function(event, ui)
-	{	
-		getNearFriendsHome();
+	{
+		validate(getNearFriendsHome());
 	});
 	
 	$('#check_in_loc_page').bind('pagebeforeshow', function(event, ui)
 	{
-		getNearLocsCheckin();
+		validate(getNearLocsCheckin());
 	});
 	
 	$('#friends_page').bind('pagebeforeshow', function(event, ui)
 	{
-		getUserFriends(populateFriendList);
+		validate(getUserFriends(populateFriendList));
 	});
 	
 	$('#profile_page').bind('pagebeforeshow', function(event, ui)
 	{
 		var id = $.url().fparam("friend_id");
 		
-		getFriendProfile(id, populateProfilePage);
+		validate(getFriendProfile(id, populateProfilePage));
 	});
 });

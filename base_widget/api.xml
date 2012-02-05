@@ -4,6 +4,14 @@
 		<![CDATA[This is an API to interact with all the FFinder commands]]>
 	</description>
 	
+	<command id='testValidation' security='private'>
+		<description><![CDATA[This API command is used for user validation.]]></description>
+		<index>
+			<description><![CDATA[Returns whether or not the user exisits in the system.]]></description>
+			<action file='testValidation.php'><![CDATA[testValidUser();]]></action>
+		</index>
+	</command>
+	
 	<command id='nearFriends' security='private'>
 		<description><![CDATA[This API command lets you find nearby friends]]></description>
 		<post>

@@ -1,16 +1,20 @@
 <?php
 	include_once 'db_helper.php';
-	function get_prism_id(){
+	function get_prism_id()
+	{
 		global $_USER;
 		return $_USER['uid'];
 	}
 	
-	function show_profile_page($p_id){
+	function show_profile_page($p_id)
+	{
 		$query = "SELECT user_id FROM user_table WHERE prism_id='$p_id'";
 		$results = getDBResultsArray();
-		if(sizeof($results) == 0){
+		if(sizeof($results) == 0)
+		{
 			return true;
 		}
+		
 		return false;
 	}
 	
