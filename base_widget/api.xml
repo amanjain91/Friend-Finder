@@ -33,9 +33,9 @@
 	</command>
 	
 	<command id="findFriend" security='private'>
-		<description> </description>
+		<description><![CDATA[This API command lets you find new friends.]]></description>
 		<post>
-			<description>
+			<description><![CDATA[Command for finding new friends based on text input.]]></description>
 			<action file='find_friend.php'><![CDATA[findFriends($_POST['text']);]]></action>
 		</post>
 	</command>
