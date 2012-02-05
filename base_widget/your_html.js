@@ -31,11 +31,19 @@ function validate(callback)
 /**
  * Attempts to create a profile for the current user.
  */
-function createProfilePage(fname, lname, phone_num, email_add)
+function createProfilePage()
 {
 	if(validUser)
+	{
+		$.mobile.changePage("#home_page");
 		return;
-
+	}
+		
+	var fname = $('#fname').val();
+	var lname = $('#lname').val();
+	var phone_num = $('#pnum').val();
+	var email_add = $('#email').val();
+		
 	$.ajax({
 		url: "../../api/base_widget/profile",
 		async: false,
@@ -44,12 +52,14 @@ function createProfilePage(fname, lname, phone_num, email_add)
 		type: 'POST',
 		success: function(data)
 		{
+			console.log("Profile Created Successfully");
 			validUser = true;
 			$.mobile.changePage("#home_page");
 		},
 		error: function(jqXHR, textStatus, errorThrown)
 		{
-		
+			console.log("Error Creating Profile");
+			
 		}
 	});
 }
