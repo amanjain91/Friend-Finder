@@ -22,7 +22,7 @@
 		return false;
 	}
 	
-	/**Checks if this is a vald last name or first name**/
+	/**Checks if this is a valid last name or first name**/
 	function is_valid_name($a_name){
 		return ctype_alpha($a_name);
 	}
