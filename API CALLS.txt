@@ -45,3 +45,16 @@ $.ajax
 		console.log(data);
 	}
 });
+
+//Update Status
+$.ajax
+({
+	url: "../../api/base_widget/Location/141",
+	dataType: "text",
+	data: {"status":"sup daeg"},
+	type: 'POST',
+	success: function(data)
+	{
+		console.log(data);
+	}
+});
