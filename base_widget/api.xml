@@ -48,4 +48,12 @@
 			<action file='find_friend.php'><![CDATA[findFriends($_POST['text']);]]></action>
 		</post>
 	</command>
+
+		<command id='Location' security='private'>
+		<description><![CDATA[Updates checkin table]]></description>
+		<post>
+			<description><![CDATA[This is how you can get a listing of nearby friends from location.]]></description>
+			<action file='nearby_locations.php'><![CDATA[getLocationName($_REST['loc_id']);]]></action>
+		</post>
+	</command>
 </api>
