@@ -55,5 +55,10 @@
 			<description><![CDATA[This is how you can get a listing of nearby friends from location.]]></description>
 			<action file='location.php'><![CDATA[getLocationName($_REST['Location']);]]></action>
 		</get>
+
+		<post>
+			<description><![CDATA[Update Status.]]></description>
+			<action file='location.php'><![CDATA[updateStatus($_POST['status'], $_REST['Location']);]]></action>
+		</post>
 	</command>
 </api>
