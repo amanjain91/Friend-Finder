@@ -11,4 +11,5 @@
 		//$query = "INSERT INTO check_in 
 	}
 
+?>
 	
