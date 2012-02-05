@@ -4,7 +4,7 @@
 	/**
 	 * Returns a list of users searched by input
 	 */
-	function findFriends()
+	function findFriends($name)
 	{	
 		$arr = explode(" ", $name);
 		
