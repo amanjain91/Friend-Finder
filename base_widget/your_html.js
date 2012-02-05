@@ -180,23 +180,29 @@ $(function()
 {
 	$('#home_page').bind('pagebeforeshow',function(event, ui)
 	{
-		validate(getNearFriendsHome());
+		validate(getNearFriendsHome);
 	});
 	
 	$('#check_in_loc_page').bind('pagebeforeshow', function(event, ui)
 	{
-		validate(getNearLocsCheckin());
+		validate(getNearLocsCheckin);
 	});
 	
 	$('#friends_page').bind('pagebeforeshow', function(event, ui)
 	{
-		validate(getUserFriends(populateFriendList));
+		validate(function()
+		{
+			getUserFriends(populateFriendList)
+		});
 	});
 	
 	$('#profile_page').bind('pagebeforeshow', function(event, ui)
 	{
 		var id = $.url().fparam("friend_id");
 		
-		validate(getFriendProfile(id, populateProfilePage));
+		validate(function()
+		{
+			getFriendProfile(id, populateProfilePage)
+		});
 	});
 });
