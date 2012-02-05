@@ -4,6 +4,14 @@
 		<![CDATA[This is an API to interact with all the FFinder commands]]>
 	</description>
 	
+	<command id='testValidation' security='private'>
+		<description><![CDATA[This API command is used for user validation.]]></description>
+		<index>
+			<description><![CDATA[Returns whether or not the user exisits in the system.]]></description>
+			<action file='testValidation.php'><![CDATA[testValidUser();]]></action>
+		</index>
+	</command>
+	
 	<command id='nearFriends' security='private'>
 		<description><![CDATA[This API command lets you find nearby friends]]></description>
 		<post>
@@ -28,15 +36,16 @@
 		</index>
 		<get>
 			<description><![CDATA[This is how you can get the info for a specified friend.]]></description>
-			<action file='profile.php'><![CDATA[getInfo($_REST['friend_id']);]]></action>
+			<action file='profile.php'><![CDATA[getInfo($_REST['friends']);]]></action>
 		</get>
 	</command>
 
-	<command id='Location' security='private'>
-		<description><![CDATA[Updates checkin table]]></description>
+	
+	<command id="findFriend" security='private'>
+		<description><![CDATA[This API command lets you find new friends.]]></description>
 		<post>
-			<description><![CDATA[This is how you can get a listing of nearby friends from location.]]></description>
-			<action file='nearby_locations.php'><![CDATA[getLocationName($_REST['loc_id']);]]></action>
+			<description><![CDATA[Command for finding new friends based on text input.]]></description>
+			<action file='find_friend.php'><![CDATA[findFriends($_POST['text']);]]></action>
 		</post>
 	</command>
 </api>

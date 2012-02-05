@@ -1,4 +1,33 @@
 /**
+ * Used to validate the user if he has not been.
+ */
+var validUser = false;
+function validate(callback)
+{
+	if(validUser)
+	{
+		callback();
+	}
+	else
+	{
+		$.ajax({
+				url: "../../api/base_widget/testValidation",
+				async: true,
+				dataType: "json",
+				success: function(data)
+				{
+					callback();
+				},
+				error: function()
+				{
+					$.mobile.changePage("#create_initial_profile_page");
+				}
+		});
+	}
+}
+
+
+/**
  * Function utilized to obtain the user's location.
  */
 function getUserLocation(callBack)
@@ -51,8 +80,7 @@ function getNearFriendsHome()
  */
 function populateHomeListView(data)
 {	
-	$(".friend_row_div").remove();
-	$(".friend_row").remove();
+	$('#friends_list').empty();
 	
 	for(var d in data)
 	{
@@ -93,6 +121,8 @@ function getNearLocsCheckin()
 
 function populateCheckinLocations(data)
 {
+	$('#locations_list').empty();
+
 	$('#nearby_location_row_template').tmpl(data).appendTo('#locations_list');
 	
 	$('#locations_list').listview('refresh');
@@ -116,11 +146,31 @@ function getUserFriends(callback)
 
 function populateFriendList(data)
 {
-	$('.friend_row').remove();
+	$('#friend_page_list').empty();
 
 	$('#friends_row_template').tmpl(data).appendTo('#friend_page_list');
 	
 	$('#friend_page_list').listview('refresh');
+}
+
+function getFriendProfile(id, callback)
+{
+	$.ajax({
+			url: "../../api/base_widget/friends/" + id,
+			async: true,
+			dataType: "json",
+			success: function(data)
+			{
+				callback(data);
+			}
+	});
+}
+
+function populateProfilePage(data)
+{
+	$('#profile_content').empty();
+	
+	$('#profile_template').tmpl(data).appendTo('#profile_content');
 }
 
 /**
@@ -129,25 +179,30 @@ function populateFriendList(data)
 $(function()
 {
 	$('#home_page').bind('pagebeforeshow',function(event, ui)
-	{	
-		getNearFriendsHome();
+	{
+		validate(getNearFriendsHome);
 	});
 	
 	$('#check_in_loc_page').bind('pagebeforeshow', function(event, ui)
 	{
-		getNearLocsCheckin();
+		validate(getNearLocsCheckin);
 	});
 	
 	$('#friends_page').bind('pagebeforeshow', function(event, ui)
 	{
-		getUserFriends(populateFriendList);
+		validate(function()
+		{
+			getUserFriends(populateFriendList)
+		});
 	});
 	
 	$('#profile_page').bind('pagebeforeshow', function(event, ui)
 	{
-		var friend_id = $.url().fparam("friend_id");
+		var id = $.url().fparam("friend_id");
 		
-		
-	
+		validate(function()
+		{
+			getFriendProfile(id, populateProfilePage)
+		});
 	});
 });
