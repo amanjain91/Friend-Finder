@@ -32,9 +32,11 @@
 		</get>
 	</command>
 	
-	<command id='locPopulate' security='private'>
-		<index>
-			<action file='foreignRequest.php'><![CDATA[getGTPlacesData();]]></action>
-		</index>
+	<command id="findFriend" security='private'>
+		<description> </description>
+		<post>
+			<description>
+			<action file='find_friend.php'><![CDATA[findFriends($_POST['text']);]]></action>
+		</post>
 	</command>
 </api>

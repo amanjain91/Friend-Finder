@@ -51,8 +51,7 @@ function getNearFriendsHome()
  */
 function populateHomeListView(data)
 {	
-	$(".friend_row_div").remove();
-	$(".friend_row").remove();
+	$('#friends_list').empty();
 	
 	for(var d in data)
 	{
@@ -93,6 +92,8 @@ function getNearLocsCheckin()
 
 function populateCheckinLocations(data)
 {
+	$('#locations_list').empty();
+
 	$('#nearby_location_row_template').tmpl(data).appendTo('#locations_list');
 	
 	$('#locations_list').listview('refresh');
@@ -116,7 +117,7 @@ function getUserFriends(callback)
 
 function populateFriendList(data)
 {
-	$('.friend_row').remove();
+	$('#friend_page_list').empty();
 
 	$('#friends_row_template').tmpl(data).appendTo('#friend_page_list');
 	
