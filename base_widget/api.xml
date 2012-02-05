@@ -40,6 +40,17 @@
 		</get>
 	</command>
 
+	<command id="profile" security="private">
+		<description><![CDATA[Command used for getting and updating data about the current user.]]></description>
+		<index>
+			<description><![CDATA[This command is used to get profile information for the current user.]]></description>
+			<action file="update_profile.php"><![CDATA[read_profile(get_prism_id());]]></action>
+		</index>
+		<put>
+			<description><![CDATA[This is how you create a profile for a user if they do not exist.]]></description>
+			<action file="update_profile.php"><![CDATA[create_profile($_POST['fname'], $_POST['lname'], $_POST['phone_num'], $_POST['email_add']);]]></action>
+		</put>
+	</command>
 	
 	<command id="findFriend" security='private'>
 		<description><![CDATA[This API command lets you find new friends.]]></description>

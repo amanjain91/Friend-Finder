@@ -1,7 +1,7 @@
 /**
  * Used to validate the user if he has not been.
  */
-var validUser = false;
+validUser = false;
 function validate(callback)
 {
 	if(validUser)
@@ -12,20 +12,47 @@ function validate(callback)
 	{
 		$.ajax({
 				url: "../../api/base_widget/testValidation",
-				async: true,
+				async: false,
 				dataType: "json",
 				success: function(data)
 				{
+					console.log("User Successfully Validated");
 					callback();
 				},
-				error: function()
+				error: function(jqXHR, textStatus, errorThrown)
 				{
+					console.log("Validation Failed - Redirecting");
 					$.mobile.changePage("#create_initial_profile_page");
 				}
 		});
 	}
 }
 
+/**
+ * Attempts to create a profile for the current user.
+ */
+function createProfilePage(fname, lname, phone_num, email_add)
+{
+	if(validUser)
+		return;
+
+	$.ajax({
+		url: "../../api/base_widget/profile",
+		async: false,
+		data: {"fname": fname, "lname": lname, "phone_num": phone_num, "email_add": email_add},
+		headers: {'X-HTTP-Method-Override': 'PUT'},
+		type: 'POST',
+		success: function(data)
+		{
+			validUser = true;
+			$.mobile.changePage("#home_page");
+		},
+		error: function(jqXHR, textStatus, errorThrown)
+		{
+		
+		}
+	});
+}
 
 /**
  * Function utilized to obtain the user's location.
@@ -157,7 +184,7 @@ function getFriendProfile(id, callback)
 {
 	$.ajax({
 			url: "../../api/base_widget/friends/" + id,
-			async: true,
+			async: false,
 			dataType: "json",
 			success: function(data)
 			{
