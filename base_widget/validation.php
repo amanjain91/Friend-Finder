@@ -6,4 +6,19 @@
 		}
 		return false;
 	}
+	
+	/**checks if this phone number contains 10 digits.**/
+	function is_valid_phone_number($a_number){
+		$all_letters = str_split($a_number);
+		$count_of_valid_numbers = 0;
+		for($i = 0; $i < sizeof($all_letters); $i++){
+			if(ctype_digit($all_letters[$i])){
+				$count_of_valid_numbers++;
+			}
+		}
+		if($count_of_valid_numbers == 10){
+			return true;
+		}
+		return false;
+	}
 ?>
