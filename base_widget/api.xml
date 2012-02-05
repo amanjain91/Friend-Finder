@@ -31,4 +31,12 @@
 			<action file='profile.php'><![CDATA[getInfo($_REST['friend_id']);]]></action>
 		</get>
 	</command>
+
+	<command id='Location' security='private'>
+		<description><![CDATA[Updates checkin table]]></description>
+		<post>
+			<description><![CDATA[This is how you can get a listing of nearby friends from location.]]></description>
+			<action file='nearby_locations.php'><![CDATA[getLocationName($_REST['loc_id']);]]></action>
+		</post>
+	</command>
 </api>
