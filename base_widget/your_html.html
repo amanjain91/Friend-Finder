@@ -1,7 +1,6 @@
 <!--************************** HOME PAGE *********************************************************-->
 <div data-role="page" id="home_page">
     <div data-id="main_header" data-role='header' data-position='fixed'>
-		<a href="#home_page" data-icon='home' data-transition="pop">Home</a>
 	    <h1>FriendLoc</h1>
    	</div>
 	
@@ -54,7 +53,6 @@
 <!--************************************ Friends Page ***********************************************-->
 <div data-role="page" id="friends_page">
 	<div data-id="main_header" data-role='header' data-position='fixed'>
-		<a href="#home_page" data-icon='home' data-transition="pop">Home</a>
 	    <h1>FriendLoc</h1>
    	</div>
 
@@ -63,7 +61,7 @@
 			<ul id = "friend_page_list" data-role="listview" data-filter="true" data-filter-placeholder="Search friends..." data-filter-theme="b">
 				<script id="friends_row_template" type="text/x-jquery-tmpl">
 					<li class="friend_row" id="friend_${id}">
-						<a href="#profile&friend_id=${id}">
+						<a href="#profile_page&friend_id=${id}">
 							<img src="${img_url}"/>
 							<h1>${first_name} ${last_name}</h1>
 						</a>
@@ -90,20 +88,19 @@
 <!--************************************ Friend Profile Page ***********************************************-->
 <div data-role="page" id="profile_page">
 	<div data-id="main_header" data-role='header' data-position='fixed'>
-		<a href="#home_page" data-icon='home' data-transition="pop">Home</a>
 	    <h1>FriendLoc</h1>
    	</div>
 
 	<div data-role="content">
 		<div class="content-primary">	
-			<div id="profile_content">
-			<script id="profile_template" type="text/x-jquery-tmpl">
-				<img src = "${img_url}"/>
-				<h1>${first_name} ${last_name}</h1>
-				<p>Email: ${email_add}</p>
-				<p>Phone: ${phone_num}</p>
-			</script>
-			</div
+				<script id="profile_template" type="text/x-jquery-tmpl">
+					<img src = "${img_url}"/>
+					<h1>${first_name} ${last_name}</h1>
+					<p>Email: ${email_add}</p>
+					<p>Phone: ${phone_num}</p>
+				</script>
+				<div id="profile_content">
+				</div>
 		</div><!--/content-primary-->
 	</div>
 	

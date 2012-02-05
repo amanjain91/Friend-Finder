@@ -29,7 +29,7 @@
 		{		
 			$query = "SELECT first_name, last_name, img_url, phone_num, email_add FROM user_table WHERE user_id = '$friendID';";
 		
-			$info = getDBResultsArray($query);
+			$info = getDBResultRecord($query);
 		
 			echo json_encode($info);
 		}

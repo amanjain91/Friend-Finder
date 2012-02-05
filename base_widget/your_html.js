@@ -123,11 +123,11 @@ function populateFriendList(data)
 	$('#friend_page_list').listview('refresh');
 }
 
-function getFriendProfile(id, callBack)
+function getFriendProfile(id, callback)
 {
 	$.ajax({
 			url: "../../api/base_widget/friends/" + id,
-			async: false,
+			async: true,
 			dataType: "json",
 			success: function(data)
 			{
@@ -165,8 +165,8 @@ $(function()
 	
 	$('#profile_page').bind('pagebeforeshow', function(event, ui)
 	{
-		var friend_id = $.url().fparam("friend_id");
+		var id = $.url().fparam("friend_id");
 		
-		getFriendProfile(friend_id, populateProfilePage);
+		getFriendProfile(id, populateProfilePage);
 	});
 });
