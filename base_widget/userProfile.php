@@ -1,12 +1,12 @@
 <?php
 	//CRU(D) for profile in our database.
-	require_once 'common_functions.php'
+	require_once 'common_functions.php';
 	
 	/**Creates a profile using the given parameters for the logged in user*/
 	function createProfile($fname, $lname, $p_num, $eadd)
 	{
 		$p_id = getPrismId();
-		$sql ="
+		$sql = "
 			INSERT INTO user_table (
 				prism_id,
 				first_name,
@@ -64,16 +64,16 @@
 				FROM	user_table
 				WHERE	user_id='$u_id'
 		";
-		$result = getDBResultsArray($sql);
+		$result = getDBResultRecord($sql);
 		echo json_encode(
-			{
+			array(
 				"prismid"	=>		$result["prism_id"], 
 				"fname"		=> 		$result["first_name"],
 				"lname"		=>		$result["last_name"],
 				"pnum"		=>		$result["phone_num"],
 				"email"		=>		$result["email_add"],
-				"img_url"	=>		$result["prism_id"]
-			}
+				"img_url"	=>		$result["img_url"]
+			)
 		);
 	}
 ?>

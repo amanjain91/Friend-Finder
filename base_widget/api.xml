@@ -20,11 +20,11 @@
 		</index>
 		<put>
 			<description><![CDATA[This is how you create a profile for a user if they do not exist.]]></description>
-			<action file="userProfile.php"><![CDATA[create_profile($_POST['fname'], $_POST['lname'], $_POST['phone_num'], $_POST['email_add']);]]></action>
+			<action file="userProfile.php"><![CDATA[createProfile($_POST['fname'], $_POST['lname'], $_POST['phone_num'], $_POST['email_add']);]]></action>
 		</put>
 		<post>
 			<description><![CDATA[This is how you update the user profile.]]></description>
-			<action file="userProfile.php"><![CDATA[create_profile($_POST['fname'], $_POST['lname'], $_POST['phone_num'], $_POST['email_add']);]]></action>
+			<action file="userProfile.php"><![CDATA[updateProfile($_POST['fname'], $_POST['lname'], $_POST['phone_num'], $_POST['email_add']);]]></action>
 		</post>
 	</command>
 	

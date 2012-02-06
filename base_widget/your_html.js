@@ -17,6 +17,7 @@ function validate(callback)
 				success: function(data)
 				{
 					console.log("User Successfully Validated");
+					validUser = true;
 					callback();
 				},
 				error: function(jqXHR, textStatus, errorThrown)
@@ -52,6 +53,7 @@ function createProfilePage()
 		type: 'POST',
 		success: function(data)
 		{
+			console.log(data);
 			console.log("Profile Created Successfully");
 			validUser = true;
 			$.mobile.changePage("#home_page");
@@ -62,6 +64,17 @@ function createProfilePage()
 			
 		}
 	});
+}
+
+// Writes an error message to a list.
+function writeErrorList(list, message)
+{
+	list.empty();
+
+	var data = {"message": message};
+	list.append($('#error_list_template').tmpl(data));
+	
+	list.listview('refresh');
 }
 
 /**
@@ -107,6 +120,10 @@ function getNearFriendsHome()
 			success: function(data)
 			{   
 				populateHomeListView(data);
+			},
+			error: function(jqXHR, textStatus, errorThrown)
+			{
+				writeErrorList($('#friends_list'), "None of your friends are checked in.");
 			}
 		});
 	});

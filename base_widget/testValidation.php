@@ -9,7 +9,7 @@
 		{
 			$GLOBALS["_PLATFORM"]->sandboxHeader('HTTP/1.1 403 Forbidden');
 		}
-		echo
+		else
 		{
 			echo json_encode(array("valid" => $valid_user));
 		}

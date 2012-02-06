@@ -13,7 +13,7 @@
 	{
 		$prism = getPrismId();
 		$query = "SELECT user_id FROM user_table WHERE prism_id='$prism'";
-		$results = getDBResultsArray();
+		$results = getDBResultRecord($query);
 		
 		if(sizeof($results) == 0)
 		{

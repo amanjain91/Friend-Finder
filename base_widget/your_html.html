@@ -60,7 +60,7 @@
 		<div class="content-primary">
 			<script id="friends_row_template" type="text/x-jquery-tmpl">
 				<li class="friend_row" id="friend_${id}">
-					<a href="#profile_page&friend_id=${id}">
+					<a onclick="window.location = '#profile_page&friend_id=${id}';">
 						<img src="${img_url}"/>
 						<h1>${first_name} ${last_name}</h1>
 					</a>
@@ -152,3 +152,10 @@
 <!--*************************************************************************************************-->
 <div data-role="page" id="settings_page">
 </div>
+
+<!--******************************** Other Stuff ****************************************************-->
+<script id="error_list_template" type="text/x-jquery-tmpl">
+	<li class="error_row">
+		<h1>${message}</h1>
+	</li>
+</script>
