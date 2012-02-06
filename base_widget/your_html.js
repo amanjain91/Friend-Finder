@@ -259,4 +259,10 @@ $(function()
 			getFriendProfile(id, populateProfilePage)
 		});
 	});
+	
+	$('#profile_page').bind('pagehide', function() 
+	{
+		$(this).attr("data-url",$(this).attr("id"));
+		delete $(this).data()['url'];
+	});
 });
