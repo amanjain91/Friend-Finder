@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <api>
 	<description>
-		<![CDATA[This is an API to interact with all the FFinder commands]]>
+		<![CDATA[This is an API to interact with all the FriendLocator commands.]]>
 	</description>
 	
 	<command id='testValidation' security='private'>
@@ -10,6 +10,34 @@
 			<description><![CDATA[Returns whether or not the user exisits in the system.]]></description>
 			<action file='testValidation.php'><![CDATA[testValidUser();]]></action>
 		</index>
+	</command>
+	
+	<command id="profile" security="private">
+		<description><![CDATA[Command used for getting and updating data about the current user.]]></description>
+		<index>
+			<description><![CDATA[This command is used to get profile information for the current user.]]></description>
+			<action file="userProfile.php"><![CDATA[getProfile();]]></action>
+		</index>
+		<put>
+			<description><![CDATA[This is how you create a profile for a user if they do not exist.]]></description>
+			<action file="userProfile.php"><![CDATA[create_profile($_POST['fname'], $_POST['lname'], $_POST['phone_num'], $_POST['email_add']);]]></action>
+		</put>
+		<post>
+			<description><![CDATA[This is how you update the user profile.]]></description>
+			<action file="userProfile.php"><![CDATA[create_profile($_POST['fname'], $_POST['lname'], $_POST['phone_num'], $_POST['email_add']);]]></action>
+		</post>
+	</command>
+	
+	<command id='friends' security='private'>
+		<description><![CDATA[This API command lets you get your friends]]></description>
+		<index>
+			<description><![CDATA[This is how you can get a listing of all of your friends.]]></description>
+			<action file='friends.php'><![CDATA[getAllFriends();]]></action>
+		</index>
+		<get>
+			<description><![CDATA[This is how you can get the info for a specified friend.]]></description>
+			<action file='friends.php'><![CDATA[getInfo($_REST['friends']);]]></action>
+		</get>
 	</command>
 	
 	<command id='nearFriends' security='private'>
@@ -24,32 +52,8 @@
 		<description><![CDATA[This API command lets you find nearby locations]]></description>
 		<post>
 			<description><![CDATA[This is how you can get a listing of nearby friends from location.]]></description>
-			<action file='nearby_locations.php'><![CDATA[getCloseLocations($_POST['lat'], $_POST['long']);]]></action>
+			<action file='nearme.php'><![CDATA[getCloseLocations($_POST['lat'], $_POST['long']);]]></action>
 		</post>
-	</command>
-	
-	<command id='friends' security='private'>
-		<description><![CDATA[This API command lets you get your friends]]></description>
-		<index>
-			<description><![CDATA[This is how you can get a listing of all of your friends.]]></description>
-			<action file='friends.php'><![CDATA[getAllFriends();]]></action>
-		</index>
-		<get>
-			<description><![CDATA[This is how you can get the info for a specified friend.]]></description>
-			<action file='profile.php'><![CDATA[getInfo($_REST['friends']);]]></action>
-		</get>
-	</command>
-
-	<command id="profile" security="private">
-		<description><![CDATA[Command used for getting and updating data about the current user.]]></description>
-		<index>
-			<description><![CDATA[This command is used to get profile information for the current user.]]></description>
-			<action file="update_profile.php"><![CDATA[read_profile(get_prism_id());]]></action>
-		</index>
-		<put>
-			<description><![CDATA[This is how you create a profile for a user if they do not exist.]]></description>
-			<action file="update_profile.php"><![CDATA[create_profile($_POST['fname'], $_POST['lname'], $_POST['phone_num'], $_POST['email_add']);]]></action>
-		</put>
 	</command>
 	
 	<command id="findFriend" security='private'>
@@ -60,16 +64,16 @@
 		</post>
 	</command>
 
-		<command id='Location' security='private'>
+	<command id='location' security='private'>
 		<description><![CDATA[Updates checkin table]]></description>
 		<get>
 			<description><![CDATA[This is how you can get a listing of nearby friends from location.]]></description>
-			<action file='location.php'><![CDATA[getLocationName($_REST['Location']);]]></action>
+			<action file='location.php'><![CDATA[getLocationName($_REST['location']);]]></action>
 		</get>
 
 		<post>
 			<description><![CDATA[Update Status.]]></description>
-			<action file='location.php'><![CDATA[updateStatus($_POST['status'], $_REST['Location']);]]></action>
+			<action file='location.php'><![CDATA[updateStatus($_POST['status'], $_REST['location']);]]></action>
 		</post>
 	</command>
 </api>

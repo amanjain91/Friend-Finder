@@ -1,11 +1,11 @@
 <?php
 	//CRU(D) for profile in our database.
-	include_once 'db_helper.php'
-	include_once 'common_functions.php'
+	require_once 'common_functions.php'
 	
 	/**Creates a profile using the given parameters for the logged in user*/
-	function create_profile($fname, $lname, $p_num, $eadd){
-		$p_id = get_prism_id();
+	function createProfile($fname, $lname, $p_num, $eadd)
+	{
+		$p_id = getPrismId();
 		$sql ="
 			INSERT INTO user_table (
 				prism_id,
@@ -20,14 +20,18 @@
 				'$lname',
 				'$pnum',
 				'$eadd'
-			)
+			);
 		";
-		getDBResultAffected($sql);
-		return;
+		
+		$res = getDBResultInserted($sql, 0);
+		
+		if(sizeof($res) == 0)
+			$GLOBALS["_PLATFORM"]->sandboxHeader('HTTP/1.1 500 Internal Server Error');
 	}
 	
 	/** Updating the profile of the user. **/
-	function update_profile($prism_id, $fname, $lname, $phone, $mail){
+	function updateProfile($fname, $lname, $phone, $mail)
+	{
 		//Get the user id
 		$u_id = getUserId();
 		//Put his data directly into the database because getUserId makes
@@ -39,15 +43,17 @@
 						last_name='$lname',
 						phone_num = '$phone',
 						email_add = '$mail',
-				WHERE 	user_id='$u_id'
-				AND		prism_id='$prism_id'
+				WHERE 	user_id='$u_id';
 		";
-		getDBResultsArray($sql);
-		return;
+		
+		getDBResultAffected($sql);
 	}
 	
 	/*Reads the profile for the given prism id.*/
-	function read_profile($p_id){
+	function getProfile()
+	{
+		$u_id = getUserId();
+		
 		$sql  = "
 				SELECT	prism_id,
 						first_name,

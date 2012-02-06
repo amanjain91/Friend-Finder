@@ -1,20 +1,17 @@
 <?php
+	require_once 'common_functions.php';
 
-include 'common_functions.php';
-
-function testValidUser()
-{
-	$prism = get_prism_id();
-	$valid_user = show_profile_page($prism);
-	
-	if(!$valid_user)
+	function testValidUser()
 	{
-		$GLOBALS["_PLATFORM"]->sandboxHeader('HTTP/1.1 404 Not Found');
+		$valid_user = isCurrentUserValid();
+		
+		if(!$valid_user)
+		{
+			$GLOBALS["_PLATFORM"]->sandboxHeader('HTTP/1.1 403 Forbidden');
+		}
+		echo
+		{
+			echo json_encode(array("valid" => $valid_user));
+		}
 	}
-	echo
-	{
-		echo json_encode(array("valid" => $valid_user));
-	}
-}
-
 ?>
