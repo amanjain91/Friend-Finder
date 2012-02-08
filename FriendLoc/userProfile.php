@@ -5,6 +5,11 @@
 	/**Creates a profile using the given parameters for the logged in user*/
 	function createProfile($fname, $lname, $p_num, $eadd)
 	{
+		$fname = mysql_real_escape_string($fname);
+		$lname = mysql_real_escape_string($lname);
+		$p_num = mysql_real_escape_string($p_num);
+		$eadd = mysql_real_escape_string($eadd);
+	
 		$p_id = getPrismId();
 		$sql = "
 			INSERT INTO user_table (
@@ -32,6 +37,11 @@
 	/** Updating the profile of the user. **/
 	function updateProfile($fname, $lname, $phone, $mail)
 	{
+		$fname = mysql_real_escape_string($fname);
+		$lname = mysql_real_escape_string($lname);
+		$phone = mysql_real_escape_string($phone);
+		$mail = mysql_real_escape_string($mail);
+	
 		//Get the user id
 		$u_id = getUserId();
 		//Put his data directly into the database because getUserId makes

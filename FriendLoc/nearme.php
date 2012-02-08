@@ -82,55 +82,27 @@
 	// Returns a list of the X closest locations.
 	function getCloseLocations($lat, $long) 
 	{
-		$locations = array();
-		$query = "SELECT * FROM location_table";
-		$result = getDBResultsArray($query);
-		
-		$i=0;
-		foreach ($result as $row)
+		if(!(is_numeric($lat) and is_numeric($long)))
 		{
-			$cur_lat = $row["latitude"];
-			$cur_long = $row["longitude"];
-			$dist = sqrt(pow($cur_lat - $lat, 2) + pow($cur_long-$long, 2));
-			$locations[$i]['id'] = $row['location_id'];
-			$locations[$i]['location'] = $row['building_name'];
-			$locations[$i++]['dist'] = $dist;
+			$GLOBALS["_PLATFORM"]->sandboxHeader('HTTP/1.1 404 Not Found');
+			die();
 		}
 		
-		//old school - bubble sort by dist
-		$temp = array();
-		$num_buildings = count($locations);
-		for ($i=0; $i<$num_buildings; $i++) 
+		$limit = 10;
+		$query = 
+			"SELECT location_id AS id, building_name AS location 
+			FROM `location_table` 
+			ORDER BY SQRT(POW((longitude - $long), 2) + POW((latitude - $lat), 2)) ASC
+			LIMIT $limit;";
+		
+		$res = getDBResultsArray($query);
+		
+		if(sizeof($res) == 0)
 		{
-			for ($j=0; $j<$num_buildings-1; $j++) 
-			{
-				if ($locations[$j]['dist']>$locations[$j+1]['dist']) 
-				{
-					$temp[0]['id'] = $locations[$j]['id'];
-					$temp[0]['location'] = $locations[$j]['location'];
-					$temp[0]['dist'] = $locations[$j]['dist'];
-
-					$locations[$j]['id'] = $locations[$j+1]['id'];
-					$locations[$j]['location'] = $locations[$j+1]['location'];
-					$locations[$j]['dist'] = $locations[$j+1]['dist'];
-
-					$locations[$j+1]['id'] = $temp[0]['id'];
-					$locations[$j+1]['location'] = $temp[0]['location'];
-					$locations[$j+1]['dist'] = $temp[0]['dist'];
-				}
-			}
+			$GLOBALS["_PLATFORM"]->sandboxHeader('HTTP/1.1 404 Not Found');
+			die();
 		}
-				
-		
-		$num = 5;
-		$toret = array();
-		
-		//return top 5
-		for ($i = 0; $i < $num; $i++) {
-			$toret[$i]['id'] = $locations[$i]['id'];
-			$toret[$i]['location'] = $locations[$i]['location'];			
-		}
-		
-		echo json_encode($toret);
+	
+		echo json_encode($res);
 	}	
 ?>

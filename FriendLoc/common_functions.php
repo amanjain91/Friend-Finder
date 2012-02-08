@@ -11,7 +11,7 @@
 	// Returns true if the user that is logged is in the system, false otherwise.
 	function isCurrentUserValid()
 	{
-		$prism = getPrismId();
+		$prism = mysql_real_escape_string(getPrismId());
 		$query = "SELECT user_id FROM user_table WHERE prism_id='$prism'";
 		$results = getDBResultRecord($query);
 		
@@ -26,7 +26,7 @@
 	// Used to obtain the database user id of the currently logged in user.
 	function getUserId()
 	{
-		$prism_id = getPrismId();
+		$prism_id = mysql_real_escape_string(getPrismId());
 		$row = getDBResultRecord("
 			SELECT user_id 
 			FROM user_table 
@@ -46,7 +46,9 @@
 	// Obtains a list of the specified user's friends.
 	function getFriends($user_id) 
 	{
-		$arr = getDBResultsArray("SELECT user_b FROM friend_map WHERE status=1 AND user_a='$user_id' UNION SELECT user_a FROM friend_map WHERE status=1 AND user_b='$user_id'");
+		$uid = mysql_real_escape_string("$user_id");
+	
+		$arr = getDBResultsArray("SELECT user_b FROM friend_map WHERE status=1 AND user_a='$uid' UNION SELECT user_a FROM friend_map WHERE status=1 AND user_b='$uid'");
 		$ret = array();
 		
 		foreach($arr as $row) 
@@ -63,6 +65,8 @@
 	// Obtains a listing of all of the checkins for the friends of the specified user.
 	function getFriendCheckIns($user_id)
 	{
+		$uid = mysql_real_escape_string("$user_id");
+	
 		return getDBResultsArray(
 		"	
 			SELECT * 
@@ -71,11 +75,11 @@
 			IN (
 				SELECT user_a
 				FROM friend_map
-				WHERE user_b = '$user_id'
+				WHERE user_b = '$uid'
 				AND STATUS =1
 				UNION SELECT user_b
 				FROM friend_map
-				WHERE user_a = '$user_id'
+				WHERE user_a = '$uid'
 				AND STATUS =1
 			)
 		");

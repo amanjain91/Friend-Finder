@@ -64,16 +64,23 @@
 		</post>
 	</command>
 
-	<command id='location' security='private'>
-		<description><![CDATA[Updates checkin table]]></description>
+	<command id='tags' security='private'>
+		<description><![CDATA[Used in order to obtain tags for a given location or position.]]></description>	
 		<get>
-			<description><![CDATA[This is how you can get a listing of nearby friends from location.]]></description>
-			<action file='location.php'><![CDATA[getLocationName($_REST['location']);]]></action>
+			<description><![CDATA[This is how you can get a listing of nearby tags from a building id.]]></description>
+			<action file='tags.php'><![CDATA[getNearbyTagsLoc($_REST['tags']);]]></action>
 		</get>
-
 		<post>
-			<description><![CDATA[Update Status.]]></description>
-			<action file='location.php'><![CDATA[updateStatus($_POST['status'], $_REST['location']);]]></action>
+			<description><![CDATA[This is how you can get a listing of nearby tags from a gps location.]]></description>
+			<action file='tags.php'><![CDATA[getNearbyTags($_POST['lat'], $_POST['long']);]]></action>
+		</post>
+	</command>
+	
+	<command id='checkin' security='private'>
+		<description><![CDATA[Used for performing a check-in.]]></description>
+		<post>
+			<description><![CDATA[Check-in the current user.]]></description>
+			<action file='checkin.php'><![CDATA[checkIn($_POST['status'], $_POST['tags'], $_POST['location']);]]></action>
 		</post>
 	</command>
 </api>

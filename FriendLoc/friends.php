@@ -44,8 +44,10 @@
 		}
 		
 		if($found)
-		{		
-			$query = "SELECT first_name, last_name, img_url, phone_num, email_add FROM user_table WHERE user_id = '$friendID';";
+		{
+			$frnd = mysql_real_escape_string($friendID);
+		
+			$query = "SELECT first_name, last_name, img_url, phone_num, email_add FROM user_table WHERE user_id = '$frnd';";
 		
 			$info = getDBResultRecord($query);
 		

@@ -27,7 +27,7 @@
 		<div data-role="navbar" class="ui-state-persist">
 			<ul>
 				<li><a href="#friends_page" data-transition="slide">Friends</a></li>
-				<li><a href="#check_in_loc_page" data-transition="slide">Check In</a></li>
+				<li><a href="#check_in" data-transition="slide">Check In</a></li>
 				<li><a href="#settings_page" data-transition="slide">Settings</a></li>
 			</ul>
 		</div>
@@ -38,16 +38,100 @@
 </div>
 
 <!--*************************************************************************************************-->
-<div data-role="page" id="check_in_loc_page">	
+<div data-role="page" id="check_in">
+	<div data-id="main_header" data-role='header' data-position='fixed'>
+	    <h1>FriendLoc</h1>
+   	</div>
+	
 	<div id="check_in_loc_content" data-role="content" >
 		<script id="nearby_location_row_template" type="text/x-jquery-tmpl">
 			<li class="location_row" id="location_${id}">
-				<a href="#">${location}</a>
+				<a onclick="continueCheckInAt('${location}', '${id}');">${location}</a>
 			</li>
 		</script>
-		<ul id="locations_list"  data-role="listview" data-theme="g" data-inset="true" data-filter="true">
+		<ul id="locations_list"  data-role="listview" data-theme="c" data-inset="false" data-filter="true">
 		</ul>
 	</div>
+	
+	<div data-id="main_footer" data-role="footer" data-position="fixed">
+		<div data-role="navbar" class="ui-state-persist">
+			<ul>
+				<li><a href="#friends_page" data-transition="slide">Friends</a></li>
+				<li><a href="#check_in" class="ui-btn-active" data-transition="slide">Check In</a></li>
+				<li><a href="#settings_page" data-transition="slide">Settings</a></li>
+			</ul>
+		</div>
+	</div>
+	<script>	
+		$.mobile.fixedToolbars.setTouchToggleEnabled(false);
+	</script>
+</div>
+
+<!--*************************************************************************************************-->
+<div data-role="page" id="check_in_activity_page">
+	<div data-id="main_header" data-role='header' data-position='fixed'>
+	    <h1>FriendLoc</h1>
+   	</div>
+	
+	<div data-role="content">
+		<script id="tag_list_tmpl" type="text/x-jquery-tmpl">
+			<li>
+				<a onclick="appendTag('${tag}');">${tag}</a>
+			</li>
+		</script>
+		<h1 id="checkin_loc_name_header"></h1>
+		<div data-role="fieldcontain">
+			<label for="status_checkin">Status:</label>
+			<input type="text" name="status" id="status_checkin" value="" placeholder="Enter your status..."/>
+		</div>
+		<div data-role="fieldcontain">
+			<label for="tag_checkin">Tags:</label>
+			<input type="text" name="tag" id="tag_checkin" value="" placeholder="Enter tags or select from below..."/>
+		</div>
+		<div data-role="fieldcontain">
+			<input type="hidden" name="location" id="loc_checkin" value=""/>
+		</div>
+		<div data-role="collapsible-set" data-theme="b" data-content-theme="c">		
+			<div data-role="collapsible" data-collapsed="false">
+				<h1>Preset</h1>
+				<br />
+				<ul data-role="listview" data-inset="false">
+					<li><a onclick="appendTag('Studying');">Studying</a></li>
+					<li><a onclick="appendTag('Eating');">Eating</a></li>
+					<li><a onclick="appendTag('Chilling');">Chilling</a></li>
+					<li><a onclick="appendTag('Partying');">Partying</a></li>
+				</ul>
+			</div>
+			<div data-role="collapsible" data-collapsed="true">
+				<h1>Popular Nearby</h1>
+				<br />
+				<ul id="nearby_tag_list" data-role="listview" data-inset="false" data-theme="c" data-divider-theme="b">
+				</ul>
+			</div>
+			<div data-role="collapsible" data-collapsed="true">
+				<h1>Popular With Friends</h1>
+				<br />
+				<ul id="friend_tag_list" data-role="listview" data-inset="false" data-theme="c" data-divider-theme="b">
+				</ul>
+			</div>
+		</div>
+		<div data-role="fieldcontain">
+			<a href="#home_page" onclick="checkIn();" data-role="button">Check In</a>
+		</div>
+	</div>
+	
+	<div data-id="main_footer" data-role="footer" data-position="fixed">
+		<div data-role="navbar" class="ui-state-persist">
+			<ul>
+				<li><a href="#friends_page" data-transition="slide">Friends</a></li>
+				<li><a href="#check_in" class="ui-btn-active" data-transition="slide">Check In</a></li>
+				<li><a href="#settings_page" data-transition="slide">Settings</a></li>
+			</ul>
+		</div>
+	</div>
+	<script>	
+		$.mobile.fixedToolbars.setTouchToggleEnabled(false);
+	</script>
 </div>
 
 <!--************************************ Friends Page ***********************************************-->
@@ -75,7 +159,7 @@
 		<div data-role="navbar" class="ui-state-persist">
 			<ul>
 				<li><a href="#friends_page" class="ui-btn-active" data-transition="slide">Friends</a></li>
-				<li><a href="#check_in_loc_page" data-transition="slide">Check In</a></li>
+				<li><a href="#check_in" data-transition="slide">Check In</a></li>
 				<li><a href="#settings_page" data-transition="slide">Settings</a></li>
 			</ul>
 		</div>
@@ -106,7 +190,7 @@
 		<div data-role="navbar" class="ui-state-persist">
 			<ul>
 				<li><a href="#friends_page" data-transition="slide">Friends</a></li>
-				<li><a href="#check_in_loc_page" data-transition="slide">Check In</a></li>
+				<li><a href="#check_in" data-transition="slide">Check In</a></li>
 				<li><a href="#settings_page" data-transition="slide">Settings</a></li>
 			</ul>
 		</div>
@@ -151,6 +235,7 @@
 
 <!--*************************************************************************************************-->
 <div data-role="page" id="settings_page">
+
 </div>
 
 <!--******************************** Other Stuff ****************************************************-->

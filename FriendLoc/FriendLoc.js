@@ -11,7 +11,7 @@ function validate(callback)
 	else
 	{
 		$.ajax({
-				url: "../../api/base_widget/testValidation",
+				url: "api/testValidation",
 				async: false,
 				dataType: "json",
 				success: function(data)
@@ -46,7 +46,7 @@ function createProfilePage()
 	var email_add = $('#email').val();
 		
 	$.ajax({
-		url: "../../api/base_widget/profile",
+		url: "api/profile",
 		async: false,
 		data: {"fname": fname, "lname": lname, "phone_num": phone_num, "email_add": email_add},
 		headers: {'X-HTTP-Method-Override': 'PUT'},
@@ -75,6 +75,17 @@ function writeErrorList(list, message)
 	list.append($('#error_list_template').tmpl(data));
 	
 	list.listview('refresh');
+}
+
+function writeErrorMessage(message)
+{
+	$("<div class='ui-loader ui-overlay-shadow ui-body-e ui-corner-all'><h1>" + message + "</h1></div>").css({ "display": "block", "opacity": 0.96, "top": $(window).scrollTop() + 100 })
+	.appendTo( $.mobile.pageContainer )
+	.delay( 1500 )
+	.fadeOut( 400, function()
+	{
+		$(this).remove();
+	});
 }
 
 /**
@@ -112,7 +123,7 @@ function getNearFriendsHome()
 	getUserLocation(function(pos)
 	{
 		$.ajax({
-			url: "../../api/base_widget/nearFriends",
+			url: "api/nearFriends",
 			async: false,
 			dataType: "json",
 			data: {'lat': pos.coords.latitude, 'long': pos.coords.longitude},
@@ -160,7 +171,7 @@ function getNearLocsCheckin()
 	getUserLocation(function(pos)
 	{
 		$.ajax({
-			url: "../../api/base_widget/nearLocations",
+			url: "api/nearLocations",
 			async: false,
 			dataType: "json",
 			data: {'lat': pos.coords.latitude, 'long': pos.coords.longitude},
@@ -183,12 +194,101 @@ function populateCheckinLocations(data)
 }
 
 /**
+ * Used for transitioning from the location check in page to the activity check in page.
+ */
+function continueCheckInAt(loc, id)
+{
+	$('#status_checkin').val("");
+	$('#tag_checkin').val("");
+	$('#checkin_loc_name_header').text(loc);
+	$('#loc_checkin').val(id);
+	
+	$.mobile.changePage("#check_in_activity_page", {changeHash: false});
+} 
+
+/**
+ * Append the given tag text to the tag list.
+ */
+function appendTag(tag)
+{
+	var tagList = $('#tag_checkin');
+	var oldStr = tagList.val();
+	tagList.val($.trim(oldStr + ' ' + tag));
+}
+
+/**
+ * Retrive relevant tag data.
+ */
+function getPopularTags(id)
+{
+	$.ajax({
+		url: "api/tags/" + id,
+		async: false,
+		dataType: "json",
+		success: function(data)
+		{   
+			var near = data.nearby;
+			var friends = data.friends;
+			
+			$('#nearby_tag_list').empty();
+			$('#friend_tag_list').empty();
+			
+			if(near.length == 0)
+			{
+				writeErrorList($('#nearby_tag_list'), "No users are checked in nearby.");
+			}
+			else
+			{
+				$('#nearby_tag_list').append($('#tag_list_tmpl').tmpl(near));
+			}
+			
+			if(friends.length == 0)
+			{
+				writeErrorList($('#friend_tag_list'), "None of your friends are checked in.");
+			}
+			else
+			{
+				$('#friend_tag_list').append($('#tag_list_tmpl').tmpl(friends));
+			}
+			
+			$('#nearby_tag_list').listview('refresh');
+			$('#friend_tag_list').listview('refresh');
+		}
+	});
+}
+
+/**
+ * Attempts to file a checkin with the server.
+ */
+function checkIn()
+{
+	var status = $('#status_checkin').val();
+	var tags = $('#tag_checkin').val();
+	var location = $('#loc_checkin').val();
+	
+	$.ajax({
+		url: "api/checkin",
+		data: {"status": status, "tags": tags, "location": location},
+		dataType: "json",
+		type: 'POST',
+		success: function(data)
+		{
+		
+		}
+		error: function(jqXHR, textStatus, errorThrown)
+		{
+			writeErrorMessage("An error occured while attempting to check in.")
+		}
+	});
+}
+
+/**
  * Get a list of the users friends.
  */
 function getUserFriends(callback)
 {
 	$.ajax({
-			url: "../../api/base_widget/friends",
+			url: "api/friends",
 			async: false,
 			dataType: "json",
 			success: function(data)
@@ -207,10 +307,13 @@ function populateFriendList(data)
 	$('#friend_page_list').listview('refresh');
 }
 
+/**
+ * Obtains relevant data about a specified friend.
+ */
 function getFriendProfile(id, callback)
 {
 	$.ajax({
-			url: "../../api/base_widget/friends/" + id,
+			url: "api/friends/" + id,
 			async: false,
 			dataType: "json",
 			success: function(data)
@@ -237,9 +340,17 @@ $(function()
 		validate(getNearFriendsHome);
 	});
 	
-	$('#check_in_loc_page').bind('pagebeforeshow', function(event, ui)
+	$('#check_in').bind('pagebeforeshow', function(event, ui)
 	{
 		validate(getNearLocsCheckin);
+	});
+	
+	$('#check_in_activity_page').bind('pagebeforeshow', function(event, ui)
+	{
+		validate(function()
+		{
+			getPopularTags($('#loc_checkin').val());
+		});
 	});
 	
 	$('#friends_page').bind('pagebeforeshow', function(event, ui)

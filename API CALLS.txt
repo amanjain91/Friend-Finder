@@ -58,3 +58,14 @@ $.ajax
 		console.log(data);
 	}
 });
+
+$.ajax({
+	url: "api/checkin",
+	data: {"status": "WOOOO", "tags": "tag1 tag2 tag3", "location": 10},
+	dataType: "text",
+	type: 'POST',
+	error: success(data)
+	{
+		console.log(data);
+	}
+});
