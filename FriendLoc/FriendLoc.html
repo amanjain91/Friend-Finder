@@ -148,8 +148,16 @@
 		</div>
 	</a>
 
-	<div data-role="content">
-		<div class="content-primary">
+	<div class="ui-body-b">
+		<div data-role="navbar" data-iconpos="left">
+			<ul>
+				<li><a href="#add_friend" data-icon="plus">Add New Friend</a></li>
+			</ul>
+		</div>
+	</div>
+	
+	<div data-role="content" style="padding-top: 0px;">
+		<div data-role="fieldcontain">
 			<script id="friends_row_template" type="text/x-jquery-tmpl">
 				<li class="friend_row" id="friend_${id}">
 					<a href="#profile_page&friend_id=${id}">
@@ -158,9 +166,42 @@
 					</a>
 				</li>
 			</script>
-			<ul id = "friend_page_list" data-role="listview" data-filter="true" data-filter-placeholder="Search friends..." data-filter-theme="b">
+			<ul id = "friend_page_list" data-role="listview" data-inset="false" data-filter="true" data-filter-placeholder="Search friends..." data-filter-theme="b">
 			</ul>
-		</div><!--/content-primary-->
+		</div>
+	</div>
+	
+	<div data-id="main_footer" data-role="footer" data-position="fixed">
+		<div data-role="navbar" class="ui-state-persist">
+			<ul>
+				<li><a href="#friends_page" class="ui-btn-active" data-transition="slide">Friends</a></li>
+				<li><a href="#check_in" data-transition="slide">Check In</a></li>
+				<li><a href="#settings_page" data-transition="slide">Settings</a></li>
+			</ul>
+		</div>
+	</div>
+	<script>	
+		$.mobile.fixedToolbars.setTouchToggleEnabled(false);
+	</script>
+</div>
+
+<!--***************************************** Add Friend Page **********************************************-->
+<div data-role="page" id="add_friend">
+	<a href="#home_page" style="text-decoration: none;">
+		<div data-id="main_header" data-role='header' data-position='fixed'>
+			<h1>FriendLoc</h1>
+		</div>
+	</a>
+	
+	<div class="ui-body-c">
+		<div data-role="fieldcontain" >
+			<center>
+				<input type="search" name="friend_search" id="friend_search" value="" placeholder="Enter search key and hit enter..."/>
+			</center>
+		</div>
+	</div>
+	
+	<div data-role="content">
 	</div>
 	
 	<div data-id="main_footer" data-role="footer" data-position="fixed">
