@@ -48,7 +48,8 @@
 					'0'
 				)
 		";
-		
-		
+		if(sizeof(getDBResultInserted($sql, 0)) == 0){
+			$GLOBALS["_PLATFORM"]->sandboxHeader('HTTP/1.1 500 Internal Server Error');
+		};
 	}
 ?>
