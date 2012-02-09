@@ -68,4 +68,15 @@
 			$GLOBALS["_PLATFORM"]->sandboxHeader('HTTP/1.1 500 Internal Server Error');
 		};
 	}
+	/**Removes the friend from current friend list**/
+	function remove_friend($forever_alone_id){
+		$le_user = getUserId();
+		$sql = "
+			DELETE FROM friend_map
+			WHERE 	 (( user_a = '$le_user' AND user_b = '$forever_alone_id' )
+			OR			(user_a = '$forever_alone_id' AND user_b = '$user'))
+			AND			status = 1;
+		";
+		getDBResultAffected($sql);
+	}
 ?>
