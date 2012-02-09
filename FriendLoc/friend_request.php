@@ -52,4 +52,20 @@
 			$GLOBALS["_PLATFORM"]->sandboxHeader('HTTP/1.1 500 Internal Server Error');
 		};
 	}
+	
+	/**Accepts an existing friend request**/
+	function accept_friend($friend_id){
+		$le_user = getUserId();
+		$sql =	"
+				UPDATE friend_map
+				SET status = 1
+				WHERE	user_a = $friend_id
+				AND		user_b = $le_user
+				AND		direction = 0
+				AND 	status = 0
+		";
+		if(sizeof(getDBResultInserted($sql, 0)) == 0){
+			$GLOBALS["_PLATFORM"]->sandboxHeader('HTTP/1.1 500 Internal Server Error');
+		};
+	}
 ?>
