@@ -4,7 +4,7 @@
 		<![CDATA[This is an API to interact with all the FriendLocator commands.]]>
 	</description>
 	
-	<command id='testValidation' security='private'>
+	<command id='testUser' security='private'>
 		<description><![CDATA[This API command is used for user validation.]]></description>
 		<index>
 			<description><![CDATA[Returns whether or not the user exisits in the system.]]></description>
@@ -40,7 +40,7 @@
 		</get>
 	</command>
 	
-	<command id='nearFriends' security='private'>
+	<command id='closeFriends' security='private'>
 		<description><![CDATA[This API command lets you find nearby friends]]></description>
 		<post>
 			<description><![CDATA[This is how you can get a listing of nearby friends from location.]]></description>
@@ -48,7 +48,7 @@
 		</post>
 	</command>
 	
-	<command id='nearLocations' security='private'>
+	<command id='closeLocAtions' security='private'>
 		<description><![CDATA[This API command lets you find nearby locations]]></description>
 		<post>
 			<description><![CDATA[This is how you can get a listing of nearby friends from location.]]></description>
@@ -64,7 +64,7 @@
 		</post>
 	</command>
 
-	<command id='tags' security='private'>
+	<command id='tAgs' security='private'>
 		<description><![CDATA[Used in order to obtain tags for a given location or position.]]></description>	
 		<get>
 			<description><![CDATA[This is how you can get a listing of nearby tags from a building id.]]></description>

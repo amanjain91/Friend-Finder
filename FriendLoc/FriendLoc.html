@@ -1,8 +1,10 @@
 <!--************************** HOME PAGE *********************************************************-->
 <div data-role="page" id="home_page">
-    <div data-id="main_header" data-role='header' data-position='fixed'>
-	    <h1>FriendLoc</h1>
-   	</div>
+    <a href="#home_page" style="text-decoration: none;">
+		<div data-id="main_header" data-role='header' data-position='fixed'>
+			<h1>FriendLoc</h1>
+		</div>
+	</a>
 	
 	<div id="home_content" data-role="content">
 		<script id="nearby_friends_row_div_template" type="text/x-jquery-tmpl">
@@ -39,9 +41,11 @@
 
 <!--*************************************************************************************************-->
 <div data-role="page" id="check_in">
-	<div data-id="main_header" data-role='header' data-position='fixed'>
-	    <h1>FriendLoc</h1>
-   	</div>
+	<a href="#home_page" style="text-decoration: none;">
+		<div data-id="main_header" data-role='header' data-position='fixed'>
+			<h1>FriendLoc</h1>
+		</div>
+	</a>
 	
 	<div id="check_in_loc_content" data-role="content" >
 		<script id="nearby_location_row_template" type="text/x-jquery-tmpl">
@@ -69,9 +73,11 @@
 
 <!--*************************************************************************************************-->
 <div data-role="page" id="check_in_activity_page">
-	<div data-id="main_header" data-role='header' data-position='fixed'>
-	    <h1>FriendLoc</h1>
-   	</div>
+	<a href="#home_page" style="text-decoration: none;">
+		<div data-id="main_header" data-role='header' data-position='fixed'>
+			<h1>FriendLoc</h1>
+		</div>
+	</a>
 	
 	<div data-role="content">
 		<script id="tag_list_tmpl" type="text/x-jquery-tmpl">
@@ -136,9 +142,11 @@
 
 <!--************************************ Friends Page ***********************************************-->
 <div data-role="page" id="friends_page">
-	<div data-id="main_header" data-role='header' data-position='fixed'>
-	    <h1>FriendLoc</h1>
-   	</div>
+	<a href="#home_page" style="text-decoration: none;">
+		<div data-id="main_header" data-role='header' data-position='fixed'>
+			<h1>FriendLoc</h1>
+		</div>
+	</a>
 
 	<div data-role="content">
 		<div class="content-primary">
@@ -171,16 +179,18 @@
 
 <!--************************************ Friend Profile Page ***********************************************-->
 <div data-role="page" id="profile_page">
-	<div data-id="main_header" data-role='header' data-position='fixed'>
-	    <h1>FriendLoc</h1>
-   	</div>
+	<a href="#home_page" style="text-decoration: none;">
+		<div data-id="main_header" data-role='header' data-position='fixed'>
+			<h1>FriendLoc</h1>
+		</div>
+	</a>
 
 	<div data-role="content">
 		<script id="profile_template" type="text/x-jquery-tmpl">
 			<img src = "${img_url}"/>
 			<h1>${first_name} ${last_name}</h1>
 			<p>Email: ${email_add}</p>
-			<p>Phone: ${phone_num}</p>
+			<p>Phone: <a href="tel:${phone_num}">${phone_num}</a></p>
 		</script>
 		<div id="profile_content">
 		</div>
@@ -202,9 +212,11 @@
 
 <!--************************************ Create Profile Page ***********************************************-->
 <div data-role="page" id="create_initial_profile_page">
-	<div data-id="main_header" data-role="header" data-position="fixed">
-		<h1>FriendLoc</h1>
-	</div>
+	<a href="#home_page" style="text-decoration: none;">
+		<div data-id="main_header" data-role='header' data-position='fixed'>
+			<h1>FriendLoc</h1>
+		</div>
+	</a>
 	
 	<div data-role="content">
 		<div data-role="fieldcontain">

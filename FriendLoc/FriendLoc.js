@@ -11,7 +11,7 @@ function validate(callback)
 	else
 	{
 		$.ajax({
-				url: "api/testValidation",
+				url: "api/testUser",
 				async: false,
 				dataType: "json",
 				success: function(data)
@@ -123,7 +123,7 @@ function getNearFriendsHome()
 	getUserLocation(function(pos)
 	{
 		$.ajax({
-			url: "api/nearFriends",
+			url: "api/closeFriends",
 			async: false,
 			dataType: "json",
 			data: {'lat': pos.coords.latitude, 'long': pos.coords.longitude},
@@ -171,7 +171,7 @@ function getNearLocsCheckin()
 	getUserLocation(function(pos)
 	{
 		$.ajax({
-			url: "api/nearLocations",
+			url: "api/closeLocAtions",
 			async: false,
 			dataType: "json",
 			data: {'lat': pos.coords.latitude, 'long': pos.coords.longitude},
@@ -222,7 +222,7 @@ function appendTag(tag)
 function getPopularTags(id)
 {
 	$.ajax({
-		url: "api/tags/" + id,
+		url: "api/tAgs/" + id,
 		async: false,
 		dataType: "json",
 		success: function(data)
@@ -271,10 +271,6 @@ function checkIn()
 		data: {"status": status, "tags": tags, "location": location},
 		dataType: "json",
 		type: 'POST',
-		success: function(data)
-		{
-		
-		}
 		error: function(jqXHR, textStatus, errorThrown)
 		{
 			writeErrorMessage("An error occured while attempting to check in.")
