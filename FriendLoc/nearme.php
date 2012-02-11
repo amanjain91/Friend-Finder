@@ -64,6 +64,7 @@
 			array_push(
 				$loc_dist[$location_id_to_name[$row["loc_id"]]], 	
 				array(
+					"id"		=>  $user_data["user_id"],
 					"fname"		=>	$user_data["first_name"], 
 					"lname" 	=> 	$user_data["last_name"], 
 					"status" 	=>	$row["status"], 
