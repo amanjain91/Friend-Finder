@@ -61,7 +61,7 @@ function createProfilePage()
 		error: function(jqXHR, textStatus, errorThrown)
 		{
 			console.log("Error Creating Profile");
-			
+			writeErrorMessage("An error occured while attempting to create profile.");
 		}
 	});
 }
@@ -161,6 +161,7 @@ function populateHomeListView(data)
 	}
 
 	$('#friends_list').listview('refresh');
+	$('#home_page').trigger('create');
 }
 
 /**
@@ -376,6 +377,45 @@ function searchForFriends(text)
 	});
 }
 
+function getUserProfile()
+{
+	$.ajax({
+			url: "api/profile/",
+			async: false,
+			dataType: "json",
+			success: function(data)
+			{
+				$('#user_profile_content').empty();
+				$('#user_profile_template').tmpl(data).appendTo('#user_profile_content');
+				$('#settings_page').trigger('create');
+			}
+	});
+}
+
+function updateProfile()
+{
+	var fname = $('#mod_fname').val();
+	var lname = $('#mod_lname').val();
+	var phone_num = $('#mod_pnum').val();
+	var email_add = $('#mod_email').val();
+	var img_url = $('#mod_img').val();
+		
+	$.ajax({
+		url: "api/profile",
+		async: false,
+		data: {"fname": fname, "lname": lname, "phone_num": phone_num, "email_add": email_add, "img_url": img_url},
+		type: 'POST',
+		success: function(data)
+		{
+			writeErrorMessage("Profile updated successfully");
+		},
+		error: function(jqXHR, textStatus, errorThrown)
+		{
+			writeErrorMessage("An error occured while trying to update your profile.");
+		}
+	});
+}
+
 /**
  * Obtains relevant data about a specified friend.
  */
@@ -438,6 +478,11 @@ $(function()
 		{
 			$('#add_friend_page_list').empty();
 		});
+	});
+
+	$('#settings_page').bind('pagebeforeshow', function(event, ui)
+	{
+		validate(getUserProfile);
 	});
 	
 	$('#profile_page').bind('pagebeforeshow', function(event, ui)

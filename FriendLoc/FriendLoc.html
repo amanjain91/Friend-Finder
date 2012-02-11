@@ -300,7 +300,51 @@
 
 <!--*************************************************************************************************-->
 <div data-role="page" id="settings_page">
+	<a href="#home_page" style="text-decoration: none;">
+		<div data-id="main_header" data-role='header' data-position='fixed'>
+			<h1>FriendLoc</h1>
+		</div>
+	</a>
 
+	<div data-role="content">
+		<script id="user_profile_template" type="text/x-jquery-tmpl">
+			<div data-role="fieldcontain">
+				<label for="mod_fname">First Name:</label>
+				<input type="text" name="fname" id="mod_fname" value="${first_name}" />
+			</div>
+			<div data-role="fieldcontain">
+				<label for="mod_lname">Last Name:</label>
+				<input type="text" name="lname" id="mod_lname" value="${last_name}" />
+			</div>
+			<div data-role="fieldcontain">
+				<label for="mod_pnum">Phone Number:</label>
+				<input type="tel" name="pnum" id="mod_pnum" value="${phone_num}" />
+			</div>
+			<div data-role="fieldcontain">
+				<label for="mod_email">Email Address:</label>
+				<input type="email" name="email" id="mod_email" value="${email_add}" />
+			</div>
+			<div data-role="fieldcontain">
+				<label for="mod_img">Image URL:</label>
+				<input type="url" name="img" id="mod_img" value="${img_url}" />
+			</div>
+			<div data-role="fieldcontain">
+				<a onclick="updateProfile();" data-role="button">Update</a>
+			</div>
+		</script>
+		<div id="user_profile_content">
+		</div>
+	</div>
+	
+	<div data-id="main_footer" data-role="footer" data-position="fixed">
+		<div data-role="navbar" class="ui-state-persist">
+			<ul>
+				<li><a href="#friends_page" data-transition="slide">Friends</a></li>
+				<li><a href="#check_in" data-transition="slide">Check In</a></li>
+				<li><a href="#settings_page" class="ui-btn-active" data-transition="slide">Settings</a></li>
+			</ul>
+		</div>
+	</div>
 </div>
 
 <!--******************************** Other Stuff ****************************************************-->

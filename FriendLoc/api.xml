@@ -24,7 +24,7 @@
 		</put>
 		<post>
 			<description><![CDATA[This is how you update the user profile.]]></description>
-			<action file="userProfile.php"><![CDATA[updateProfile($_POST['fname'], $_POST['lname'], $_POST['phone_num'], $_POST['email_add']);]]></action>
+			<action file="userProfile.php"><![CDATA[updateProfile($_POST['fname'], $_POST['lname'], $_POST['phone_num'], $_POST['email_add'], $_POST['img_url']);]]></action>
 		</post>
 	</command>
 	

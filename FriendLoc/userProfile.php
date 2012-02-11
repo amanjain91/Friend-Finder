@@ -35,25 +35,27 @@
 	}
 	
 	/** Updating the profile of the user. **/
-	function updateProfile($fname, $lname, $phone, $mail)
+	function updateProfile($fname, $lname, $phone, $mail, $img_url)
 	{
 		$fname = mysql_real_escape_string($fname);
 		$lname = mysql_real_escape_string($lname);
 		$phone = mysql_real_escape_string($phone);
 		$mail = mysql_real_escape_string($mail);
+		$img_url = mysql_real_escape_string($img_url);
 	
 		//Get the user id
-		$u_id = getUserId();
+		$uid = getUserId();
 		//Put his data directly into the database because getUserId makes
 		//sure he has a valid user_id for the given prism id.
 		//TODO
 		$sql = "
 				UPDATE 	user_table
-				SET 	first_name='$fname', 
-						last_name='$lname',
+				SET 	first_name = '$fname', 
+						last_name = '$lname',
 						phone_num = '$phone',
 						email_add = '$mail',
-				WHERE 	user_id='$u_id';
+						img_url = '$img_url'
+				WHERE 	user_id = $uid;
 		";
 		
 		getDBResultAffected($sql);
@@ -65,8 +67,7 @@
 		$u_id = getUserId();
 		
 		$sql  = "
-				SELECT	prism_id,
-						first_name,
+				SELECT	first_name,
 						last_name,
 						phone_num,
 						email_add,
@@ -75,15 +76,7 @@
 				WHERE	user_id='$u_id'
 		";
 		$result = getDBResultRecord($sql);
-		echo json_encode(
-			array(
-				"prismid"	=>		$result["prism_id"], 
-				"fname"		=> 		$result["first_name"],
-				"lname"		=>		$result["last_name"],
-				"pnum"		=>		$result["phone_num"],
-				"email"		=>		$result["email_add"],
-				"img_url"	=>		$result["img_url"]
-			)
-		);
+		
+		echo json_encode($result);
 	}
 ?>
