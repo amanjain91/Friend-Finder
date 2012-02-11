@@ -66,7 +66,8 @@
 	function getFriendCheckIns($user_id)
 	{
 		$uid = mysql_real_escape_string("$user_id");
-	
+		$minutes = 60;
+		
 		return getDBResultsArray(
 		"	
 			SELECT * 
@@ -82,6 +83,7 @@
 				WHERE user_a = '$uid'
 				AND STATUS =1
 			)
+			AND TIME_TO_SEC(TIMEDIFF(NOW(), time)) < (60 * $minutes);
 		");
 	}
 ?>
