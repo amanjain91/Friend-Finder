@@ -171,7 +171,7 @@ function getNearLocsCheckin()
 	getUserLocation(function(pos)
 	{
 		$.ajax({
-			url: "api/closeLocAtions",
+			url: "api/closeLocations",
 			async: false,
 			dataType: "json",
 			data: {'lat': pos.coords.latitude, 'long': pos.coords.longitude},
@@ -222,7 +222,7 @@ function appendTag(tag)
 function getPopularTags(id)
 {
 	$.ajax({
-		url: "api/tAgs/" + id,
+		url: "api/tags/" + id,
 		async: false,
 		dataType: "json",
 		success: function(data)
@@ -297,10 +297,83 @@ function getUserFriends(callback)
 function populateFriendList(data)
 {
 	$('#friend_page_list').empty();
-
-	$('#friends_row_template').tmpl(data).appendTo('#friend_page_list');
+	
+	if(data.received.length > 0)
+	{
+		$('#friends_row_divider').tmpl({text: "Recieved Requests"}).appendTo('#friend_page_list');
+		$('#friends_row_recv_template').tmpl(data.received).appendTo('#friend_page_list');
+	}
+	
+	if(data.sent.length > 0)
+	{
+		$('#friends_row_divider').tmpl({text: "Sent Requests"}).appendTo('#friend_page_list');
+		$('#friends_row_sent_template').tmpl(data.sent).appendTo('#friend_page_list');
+	}
+	
+	if(data.friends.length > 0)
+	{
+		$('#friends_row_divider').tmpl({text: "Friends"}).appendTo('#friend_page_list');
+		$('#friends_row_template').tmpl(data.friends).appendTo('#friend_page_list');
+	}
 	
 	$('#friend_page_list').listview('refresh');
+}
+
+/**
+ * Rejects the friend request for the specified user.
+ */
+function removeFriendRequest(id)
+{
+	$.ajax({
+			url: "api/removeFriend/" + id,
+			async: true,
+			dataType: "json",
+			success: function(data)
+			{
+				$.mobile.changePage("#friends_page", {allowSamePageTransition: true, transition: "fade"});
+			}
+	});
+}
+
+/**
+ * Accept the friend request for the specified user.
+ */
+function addFriendRequest(id)
+{
+	$.ajax({
+			url: "api/addFriend/" + id,
+			async: true,
+			dataType: "json",
+			success: function(data)
+			{
+				$.mobile.changePage("#friends_page", {allowSamePageTransition: true, transition: "fade"});
+			}
+	});
+}
+
+/**
+ * Updates the add friend page by searching for friends with the given name data.
+ */
+function searchForFriends(text)
+{
+	$.ajax
+	({
+		url: "api/findFriend/",
+		dataType: "json",
+		data: {"text": text},
+		type: 'POST',
+		success: function(data)
+		{
+			if(data.length > 0)
+			{
+				$('#add_friend_page_list').empty();
+				$('#add_friend_row_tmpl').tmpl(data).appendTo('#add_friend_page_list');
+				$('#add_friend_page_list').listview('refresh');
+			}
+			else
+				writeErrorList($('#add_friend_page_list'), "No users found matching the given criteria.");
+		}
+	});
 }
 
 /**
@@ -331,6 +404,8 @@ function populateProfilePage(data)
  */
 $(function()
 {
+	$.mobile.fixedToolbars.setTouchToggleEnabled(false);
+
 	$('#home_page').bind('pagebeforeshow',function(event, ui)
 	{
 		validate(getNearFriendsHome);
@@ -354,6 +429,14 @@ $(function()
 		validate(function()
 		{
 			getUserFriends(populateFriendList)
+		});
+	});
+	
+	$('#add_friend_page').bind('pagebeforeshow', function(event, ui)
+	{
+		validate(function()
+		{
+			$('#add_friend_page_list').empty();
 		});
 	});
 	

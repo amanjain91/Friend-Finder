@@ -40,6 +40,22 @@
 		</get>
 	</command>
 	
+	<command id='removeFriend' security='private'>
+		<description><![CDATA[This API command lets you remove friends and reject friend requests.]]></description>
+		<get>
+			<description><![CDATA[This is how you can remove friends and reject friend requests.]]></description>
+			<action file='friendManage.php'><![CDATA[removeFriend($_REST['removeFriend']);]]></action>
+		</get>
+	</command>
+	
+	<command id='addFriend' security='private'>
+		<description><![CDATA[This API command lets you add friends and accept friend requests.]]></description>
+		<get>
+			<description><![CDATA[This is how you can add friends and accept requests.]]></description>
+			<action file='friendManage.php'><![CDATA[addFriend($_REST['addFriend']);]]></action>
+		</get>
+	</command>
+	
 	<command id='closeFriends' security='private'>
 		<description><![CDATA[This API command lets you find nearby friends]]></description>
 		<post>
@@ -48,7 +64,7 @@
 		</post>
 	</command>
 	
-	<command id='closeLocAtions' security='private'>
+	<command id='closeLocations' security='private'>
 		<description><![CDATA[This API command lets you find nearby locations]]></description>
 		<post>
 			<description><![CDATA[This is how you can get a listing of nearby friends from location.]]></description>
@@ -60,11 +76,11 @@
 		<description><![CDATA[This API command lets you find new friends.]]></description>
 		<post>
 			<description><![CDATA[Command for finding new friends based on text input.]]></description>
-			<action file='find_friend.php'><![CDATA[findFriends($_POST['text']);]]></action>
+			<action file='findFriends.php'><![CDATA[findFriends($_POST['text']);]]></action>
 		</post>
 	</command>
 
-	<command id='tAgs' security='private'>
+	<command id='tags' security='private'>
 		<description><![CDATA[Used in order to obtain tags for a given location or position.]]></description>	
 		<get>
 			<description><![CDATA[This is how you can get a listing of nearby tags from a building id.]]></description>

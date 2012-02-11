@@ -36,7 +36,7 @@
 		// Insert the check in.
 		$query = 
 			"INSERT INTO check_in (user_id, loc_id, status, time) 
-			VALUES ($user, $loc, '$sta', '$date');";
+			VALUES ($user, $loc, '$sta', NOW());";
 		$res = getDBResultInserted($query, "id");
 		
 		// Insert tags
@@ -48,7 +48,5 @@
 			VALUES$tagV;";
 			
 		getDBResultInserted($tagQuery, "id");
-		
-		echo json_encode(array());
 	}
 ?>

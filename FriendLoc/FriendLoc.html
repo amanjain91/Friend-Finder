@@ -21,7 +21,7 @@
 				</a>
 			</li>
 		</script>
-		<ul id="friends_list" data-role="listview" data-inset="false" data-filter="true" data-theme="c" data-divider-theme="b">
+		<ul id="friends_list" data-role="listview" data-filter="true" data-theme="c" data-divider-theme="b">
 		</ul>
 	</div>
 	
@@ -34,9 +34,6 @@
 			</ul>
 		</div>
 	</div>
-	<script>	
-		$.mobile.fixedToolbars.setTouchToggleEnabled(false);
-	</script>
 </div>
 
 <!--*************************************************************************************************-->
@@ -53,7 +50,7 @@
 				<a onclick="continueCheckInAt('${location}', '${id}');">${location}</a>
 			</li>
 		</script>
-		<ul id="locations_list"  data-role="listview" data-theme="c" data-inset="false" data-filter="true">
+		<ul id="locations_list" data-role="listview" data-theme="c" data-filter="true">
 		</ul>
 	</div>
 	
@@ -66,9 +63,6 @@
 			</ul>
 		</div>
 	</div>
-	<script>	
-		$.mobile.fixedToolbars.setTouchToggleEnabled(false);
-	</script>
 </div>
 
 <!--*************************************************************************************************-->
@@ -101,7 +95,7 @@
 			<div data-role="collapsible" data-collapsed="false">
 				<h1>Preset</h1>
 				<br />
-				<ul data-role="listview" data-inset="false">
+				<ul data-role="listview">
 					<li><a onclick="appendTag('Studying');">Studying</a></li>
 					<li><a onclick="appendTag('Eating');">Eating</a></li>
 					<li><a onclick="appendTag('Chilling');">Chilling</a></li>
@@ -135,9 +129,6 @@
 			</ul>
 		</div>
 	</div>
-	<script>	
-		$.mobile.fixedToolbars.setTouchToggleEnabled(false);
-	</script>
 </div>
 
 <!--************************************ Friends Page ***********************************************-->
@@ -148,25 +139,48 @@
 		</div>
 	</a>
 
-	<div class="ui-body-b">
+	<div class="ui-body-c">
 		<div data-role="navbar" data-iconpos="left">
 			<ul>
-				<li><a href="#add_friend" data-icon="plus">Add New Friend</a></li>
+				<li><a href="#add_friend_page" data-icon="plus">Add New Friend</a></li>
 			</ul>
 		</div>
 	</div>
 	
 	<div data-role="content" style="padding-top: 0px;">
 		<div data-role="fieldcontain">
-			<script id="friends_row_template" type="text/x-jquery-tmpl">
-				<li class="friend_row" id="friend_${id}">
-					<a href="#profile_page&friend_id=${id}">
+			<script id="friends_row_divider" type="text/x-jquery-tmpl">
+				<li data-role="list-divider">
+					${text}
+				</li>
+			</script>
+			<script id="friends_row_sent_template" type="text/x-jquery-tmpl">
+				<li data-icon="delete">
+					<a title="Cancel Friend Request" onclick="removeFriendRequest(${id});">
 						<img src="${img_url}"/>
 						<h1>${first_name} ${last_name}</h1>
 					</a>
 				</li>
 			</script>
-			<ul id = "friend_page_list" data-role="listview" data-inset="false" data-filter="true" data-filter-placeholder="Search friends..." data-filter-theme="b">
+			<script id="friends_row_recv_template" type="text/x-jquery-tmpl">
+				<li data-icon="check">
+					<a title="Accept Request" onclick="addFriendRequest(${id});">
+						<img src="${img_url}"/>
+						<h1>${first_name} ${last_name}</h1>
+					</a>
+					<a onclick="removeFriendRequest(${id});">Reject Request</a>
+				</li>
+			</script>
+			<script id="friends_row_template" type="text/x-jquery-tmpl">
+				<li>
+					<a title="View Profile" href="#profile_page&friend_id=${id}">
+						<img src="${img_url}"/>
+						<h1>${first_name} ${last_name}</h1>
+					</a>
+					<a onclick="removeFriendRequest(${id});">Remove Friend</a>
+				</li>
+			</script>
+			<ul id = "friend_page_list" data-role="listview" data-filter="true" data-filter-placeholder="Search friends..." data-theme="c" data-divider-theme="b" data-split-icon="delete">
 			</ul>
 		</div>
 	</div>
@@ -180,13 +194,10 @@
 			</ul>
 		</div>
 	</div>
-	<script>	
-		$.mobile.fixedToolbars.setTouchToggleEnabled(false);
-	</script>
 </div>
 
 <!--***************************************** Add Friend Page **********************************************-->
-<div data-role="page" id="add_friend">
+<div data-role="page" id="add_friend_page">
 	<a href="#home_page" style="text-decoration: none;">
 		<div data-id="main_header" data-role='header' data-position='fixed'>
 			<h1>FriendLoc</h1>
@@ -197,25 +208,33 @@
 		<div data-role="fieldcontain" >
 			<center>
 				<input type="search" name="friend_search" id="friend_search" value="" placeholder="Enter search key and hit enter..."/>
+				<a onclick="searchForFriends($('#friend_search').val());" data-role="button" data-inline="true">Search</a>
 			</center>
 		</div>
 	</div>
 	
 	<div data-role="content">
+		<script id="add_friend_row_tmpl" type="text/x-jquery-tmpl">
+			<li>
+				<a href="#friends_page" onclick="addFriendRequest(${id});">
+					<img src="${img_url}"/>
+					<h1>${first_name} ${last_name}</h1>
+				</a>
+			</li>
+		</script>
+		<ul id = "add_friend_page_list" data-role="listview" data-filter-theme="b">
+		</ul>
 	</div>
 	
 	<div data-id="main_footer" data-role="footer" data-position="fixed">
 		<div data-role="navbar" class="ui-state-persist">
 			<ul>
-				<li><a href="#friends_page" class="ui-btn-active" data-transition="slide">Friends</a></li>
+				<li><a href="#friends_page" data-transition="slide">Friends</a></li>
 				<li><a href="#check_in" data-transition="slide">Check In</a></li>
 				<li><a href="#settings_page" data-transition="slide">Settings</a></li>
 			</ul>
 		</div>
 	</div>
-	<script>	
-		$.mobile.fixedToolbars.setTouchToggleEnabled(false);
-	</script>
 </div>
 
 <!--************************************ Friend Profile Page ***********************************************-->
@@ -246,9 +265,6 @@
 			</ul>
 		</div>
 	</div>
-	<script>	
-		$.mobile.fixedToolbars.setTouchToggleEnabled(false);
-	</script>
 </div>
 
 <!--************************************ Create Profile Page ***********************************************-->
@@ -280,10 +296,6 @@
 			<a onclick="createProfilePage();" data-role="button">Submit</a>
 		</div>
 	</div>
-	
-	<script>	
-		$.mobile.fixedToolbars.setTouchToggleEnabled(false);
-	</script>
 </div>
 
 <!--*************************************************************************************************-->

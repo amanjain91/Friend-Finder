@@ -23,7 +23,7 @@
 				'$p_id',
 				'$fname',
 				'$lname',
-				'$pnum',
+				'$p_num',
 				'$eadd'
 			);
 		";
