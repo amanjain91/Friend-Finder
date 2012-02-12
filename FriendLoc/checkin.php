@@ -4,6 +4,14 @@
 	
 	function checkIn($status, $tags, $loc_id) 
 	{
+		$locD = getBuildingData($loc_id);
+		
+		if(!$locD)
+		{
+			$GLOBALS["_PLATFORM"]->sandboxHeader('HTTP/1.1 404 Not Found');
+			die();
+		}
+	
 		// Creates our tag list.
 		$tags = trim(mysql_real_escape_string("$tags"));
 		
@@ -36,7 +44,7 @@
 		// Insert the check in.
 		$query = 
 			"INSERT INTO check_in (user_id, loc_id, status, time) 
-			VALUES ($user, $loc, '$sta', NOW());";
+			VALUES ($user, '$loc', '$sta', NOW());";
 		$res = getDBResultInserted($query, "id");
 		
 		// Insert tags

@@ -8,12 +8,12 @@
 	
 	<div id="home_content" data-role="content">
 		<script id="nearby_friends_row_div_template" type="text/x-jquery-tmpl">
-			<li class="friend_row_div" data-role="list-divider">
+			<li data-role="list-divider">
 				${name}
 			</li>
 		</script>
 		<script id="nearby_friends_row_template" type="text/x-jquery-tmpl">
-			<li class="friend_row" data-filtertext="${fname} ${lname} ${status} ${loc}">
+			<li data-filtertext="${fname} ${lname} ${status} ${loc}">
 				<a href="#profile_page&friend_id=${id}">
 					<img src="${img_url}" class="ui-li-thumb" />
 					<h1>${fname} ${lname}</h1>
@@ -46,8 +46,11 @@
 	
 	<div id="check_in_loc_content" data-role="content" >
 		<script id="nearby_location_row_template" type="text/x-jquery-tmpl">
-			<li class="location_row" id="location_${id}">
-				<a onclick="continueCheckInAt('${location}', '${id}');">${location}</a>
+			<li id="location_${b_id}">
+				<a onclick="continueCheckInAt('${name}', '${b_id}');">
+					<img src="http://gtalumni.org/map/images/buildings/${image_url}" style="width: 80px; height: 80px;" class="ui-li-thumb" />
+					<h1>${name}</h1>
+				</a>
 			</li>
 		</script>
 		<ul id="locations_list" data-role="listview" data-theme="c" data-filter="true">

@@ -32,19 +32,19 @@
 		//Array for mapping each building id to its distance. 
 		//Will be reused later
 		$loc_dist = array();
-		$qry_str = "'" . implode("','", $list_of_locations) . "'";
 
-		// Run query
-		$query = "SELECT * FROM location_table WHERE location_id IN ($qry_str);";
-		$result = getDBResultsArray($query);
+		$result = getAllBuildingData();
 		
 		foreach($result as $row) 
 		{
-			$b_lat = $row["latitude"];
-			$b_long = $row["longitude"];
-			$dist = sqrt(pow($b_lat - $lat, 2) + pow($b_long-$long, 2));
-			$loc_dist[$row["building_name"]] = $dist;
-			$location_id_to_name[$row["location_id"]] = $row["building_name"];
+			if(in_array($row['b_id'], $list_of_locations))
+			{
+				$b_lat = $row["latitude"];
+				$b_long = $row["longitude"];
+				$dist = sqrt(pow($b_lat - $lat, 2) + pow($b_long-$long, 2));
+				$loc_dist[$row["name"]] = $dist;
+				$location_id_to_name[$row["b_id"]] = $row["name"];
+			}
 		}
 		
 		//Sorting loc_dist according to the cvalue.
@@ -90,15 +90,9 @@
 		}
 		
 		$limit = 10;
-		$query = 
-			"SELECT location_id AS id, building_name AS location 
-			FROM `location_table` 
-			ORDER BY SQRT(POW((longitude - $long), 2) + POW((latitude - $lat), 2)) ASC
-			LIMIT $limit;";
+		$res = getNearbyBuildingData($lat, $long, $limit);
 		
-		$res = getDBResultsArray($query);
-		
-		if(sizeof($res) == 0)
+		if(!$res)
 		{
 			$GLOBALS["_PLATFORM"]->sandboxHeader('HTTP/1.1 404 Not Found');
 			die();

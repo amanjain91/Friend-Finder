@@ -4,17 +4,15 @@
 	
 	function getNearbyTagsLoc($loc_id) 
 	{
-		$loc = mysql_real_escape_string("$loc_id");
-		$query = "SELECT latitude, longitude FROM location_table WHERE location_id='$loc'";
-		$row = getDBResultRecord($query);
+		$loc = getBuildingData($loc_id);
 		
-		if(sizeof($row) < 1)
+		if(!$loc)
 		{
 			$GLOBALS["_PLATFORM"]->sandboxHeader('HTTP/1.1 404 Not Found');
 			die();
 		}
 		
-		getNearbyTags($row['latitude'], $row['longitude']);
+		getNearbyTags($loc['latitude'], $loc['longitude']);
 	}
 
 	function getNearbyTags($lat, $long)
@@ -51,15 +49,9 @@
 		$retArray['friends'] = $fresults;
 		
 		// GET POPULAR NEARBY TAGS
-		$nquery = 
-			"SELECT location_id AS id 
-			FROM location_table 
-			ORDER BY SQRT(POW((longitude - $long), 2) + POW((latitude - $lat), 2)) ASC
-			LIMIT $limit;";
+		$locRes = getNearbyBuildingData($lat, $long, $limit);
 		
-		$locRes = getDBResultsArray($nquery);
-		
-		if(sizeof($locRes) == 0)
+		if(!$locRes)
 		{
 			$retArray['nearby'] = array();
 			echo json_encode($retArray);
@@ -69,7 +61,7 @@
 		$locations = array();
 		foreach($locRes as $value)
 		{
-			array_push($locations, $value['id']);
+			array_push($locations, $value['b_id']);
 		}
 	
 		$locs = implode("','", $locations);

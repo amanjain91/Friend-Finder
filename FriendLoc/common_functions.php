@@ -1,5 +1,6 @@
 <?php
 	require_once 'db_helper.php';
+	require_once 'gtplaces.php';
 	
 	// Returns the prism id of the current user.
 	function getPrismId()
