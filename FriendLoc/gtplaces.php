@@ -9,7 +9,7 @@
 		if(!$bldgs)
 			return false;
 			
-		for($bldgs as $bldg)
+		foreach($bldgs as $bldg)
 		{
 			if($bldg['b_id'] == $id)
 			{

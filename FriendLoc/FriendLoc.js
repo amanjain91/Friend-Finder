@@ -213,7 +213,8 @@ function continueCheckInAt(loc, id)
 function appendTag(tag)
 {
 	var tagList = $('#tag_checkin');
-	var oldStr = tagList.val();
+	var oldStr = $.trim(tagList.val());
+	tag = $.trim(tag);
 	tagList.val($.trim(oldStr + ' ' + tag));
 }
 
